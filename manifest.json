@@ -1,0 +1,27 @@
+{
+  "name": "Academy of the Starlet",
+  "short_name": "Starlet",
+  "description": "A multiplayer fantasy RPG where you design your character, explore magical towns, complete quests, and unlock legendary styles with friends.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#fdf8f2",
+  "theme_color": "#ec4899",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games", "entertainment"],
+  "screenshots": [],
+  "prefer_related_applications": false
+}
