@@ -1,4 +1,4 @@
-const CACHE = 'starlet-v1';
+const CACHE = 'starlet-v2';
 const ASSETS = [
   '/',
   '/index.html',
