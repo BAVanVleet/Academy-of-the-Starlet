@@ -1036,7 +1036,7 @@ const WRD={
 // ACHIEVEMENTS
 // ══════════════════════════════════════
 function checkSubjectMastery(p){
-  const subjects=['math','sci','read','hist','logic'];
+  const subjects=['math','sci','read','hist','logic','civics'];
   return subjects.every(sub=>{
     const count=Object.keys(QUESTS).filter(qid=>QUESTS[qid].subject===sub&&(p.donequests||[]).includes(qid)).length;
     return count>=3;
@@ -1425,6 +1425,141 @@ const QUESTS={
       {q:'The Socratic method of learning is best described as:',opts:['Memorizing facts from textbooks','Questioning assumptions through dialogue to reach deeper understanding','Accepting teacher explanations without question','Learning through individual research only'],ans:1,ok:"Socrates believed wisdom comes from questioning — 'the unexamined life is not worth living'!"},
       {q:"Descartes' method of doubt led to his foundational certainty: 'Cogito ergo sum' means:",opts:['I feel, therefore I am','I think, therefore I am','I doubt, therefore I am right','I exist, therefore I think'],ans:1,ok:"'Cogito ergo sum': Descartes could doubt everything except the act of doubting itself — proving he exists as a thinking thing!"},
       {q:"Kant's 'Copernican Revolution in Philosophy' argues that:",opts:['Objects shape our perception','Our mind actively structures and organizes experience, imposing categories on the world','Pure reason can know things in themselves','Empirical observation is the only knowledge'],ans:1,ok:'Kant argued the mind actively constructs experience through categories like space, time, and causality!'}
+    ]},
+
+  // ── CIVICS: LUMINOS VILLAGE ──────────────────────────────────
+  civics_luminos:{id:'civics_luminos',zone:'luminos',npc:'thornwood',subject:'civics',icon:'🏛️',
+    title:'The Village Council',
+    lore:'The village council needs citizens who understand how government works. Help them!',
+    reward:{type:'shoes',idx:1},
+    enemy:{name:'Chaos Voter',em:'🗳️',hp:2},
+    variants:[
+      {q:'Who is the leader of the United States?',opts:['A king','The President','A mayor','A general'],ans:1,ok:'The President is the leader of the United States!'},
+      {q:'What are the 3 branches of the US government?',opts:['Army, Navy, Air Force','Executive, Legislative, Judicial','Federal, State, Local','Senate, House, Courts'],ans:1,ok:'Executive (President), Legislative (Congress), and Judicial (Courts)!'},
+      {q:'What does "checks and balances" mean?',opts:['Balancing the budget','Each branch limits the others\' power','Equal pay for workers','Voting equally'],ans:1,ok:'Checks and balances prevent any one branch from becoming too powerful!'},
+      {q:'Brown v. Board of Education (1954) ruled that:',opts:['Voting rights expanded','Public school segregation is unconstitutional','Freedom of speech applies to students','The president can declare war'],ans:1,ok:'Brown v. Board overturned Plessy v. Ferguson — separate schools are inherently unequal!'},
+      {q:'Judicial review means the Supreme Court can:',opts:['Review courtrooms','Declare laws unconstitutional','Appoint new judges','Write legislation'],ans:1,ok:'Judicial review was established in Marbury v. Madison (1803) — the Court\'s most powerful tool!'},
+      {q:'Montesquieu\'s "Spirit of Laws" influenced the Constitution by:',opts:['Inspiring the Declaration of Independence','Providing the model for separation of powers','Establishing free markets','Creating federalism theory'],ans:1,ok:'Montesquieu\'s separation of powers (1748) directly shaped how the Framers divided government authority!'}
+    ]},
+
+  // ── CIVICS: CRYSTAL CAVES ────────────────────────────────────
+  civics_caves:{id:'civics_caves',zone:'caves',npc:'mira',subject:'civics',icon:'🏛️',
+    title:'Laws of the Deep',
+    lore:'Mira\'s cave dwellers need to understand the laws that govern their community.',
+    reward:{type:'hair',idx:1},
+    enemy:{name:'Anarchy Sprite',em:'⚡',hp:3},
+    variants:[
+      {q:'Why do we have laws?',opts:['To make life harder','To keep people safe and treat everyone fairly','Because kings invented them','For entertainment'],ans:1,ok:'Laws protect people and ensure fairness — society works better with agreed rules!'},
+      {q:'The Bill of Rights is:',opts:['The original Constitution','The first 10 amendments protecting individual rights','The Declaration of Independence','The rules for Congress'],ans:1,ok:'The Bill of Rights (1791) guarantees freedoms like speech, religion, and fair trial!'},
+      {q:'Who has the power to declare war in the US?',opts:['The President alone','Congress','The Supreme Court','The Secretary of Defense'],ans:1,ok:'Only Congress can formally declare war — though the president commands the military!'},
+      {q:'Marbury v. Madison (1803) established:',opts:['Presidential term limits','Judicial review — the Court can strike down unconstitutional laws','Voting rights','The Electoral College'],ans:1,ok:'Chief Justice Marshall created judicial review — now the foundation of constitutional law!'},
+      {q:'The 1st Amendment does NOT protect:',opts:['Peaceful protest','Speech inciting imminent lawless action','Political speech','Religious practice'],ans:1,ok:'Per Schenck v. US and Brandenburg v. Ohio, speech that incites imminent lawless action loses protection!'},
+      {q:'Federalist No. 51 (Madison) argues that in a republic, ambition must counteract ambition because:',opts:['Citizens are selfish','Human nature requires structural checks — factions balanced against factions prevent tyranny','Democracy is unstable','A strong executive is always necessary'],ans:1,ok:'Madison argued the Constitution channels self-interest through competing factions — no group can dominate!'}
+    ]},
+
+  // ── LOGIC: CELESTIAL LIBRARY (missing from original) ─────────
+  lib_logic:{id:'lib_logic',zone:'library',npc:'aldric',subject:'logic',icon:'🧩',
+    title:'The Logic Tower',
+    lore:'Professor Aldric\'s logic tower has collapsed into paradoxes. Rebuild it with reason!',
+    reward:{type:'acc',idx:3},
+    enemy:{name:'Paradox Phantom',em:'🔄',hp:3},
+    variants:[
+      {q:'If all books are stories, and this object is a book, then this object is:',opts:['A magazine','A story','A picture','Unknown'],ans:1,ok:'Valid deductive reasoning: if all A are B, and X is A, then X is B!'},
+      {q:'What comes next: 1, 4, 9, 16, ___?',opts:['20','25','36','24'],ans:1,ok:'These are perfect squares: 1², 2², 3², 4², 5² = 25!'},
+      {q:'A farmer has 17 sheep. All but 9 die. How many are left?',opts:['8','9','17','0'],ans:1,ok:'"All but 9" means 9 sheep survived — the farmer has 9!'},
+      {q:'A set S = {1,2,3,4,5}. How many distinct subsets does S have?',opts:['10','16','25','32'],ans:3,ok:'A set of n elements has 2ⁿ subsets. 2⁵ = 32!'},
+      {q:'If P→Q is true and Q is true, can we conclude P is true?',opts:['Yes, always','No — this is affirming the consequent (fallacy)','Yes, by contraposition','Only if P is a tautology'],ans:1,ok:'P→Q does NOT mean Q→P. Affirming the consequent is a classic logical fallacy!'},
+      {q:'Russell\'s Paradox shows that naive set theory is:',opts:['Consistent and complete','Self-contradictory — leading to axiomatic ZFC set theory','Fully provable','Irrelevant to mathematics'],ans:1,ok:'Russell\'s Paradox (1901) revealed that "the set of all sets not containing themselves" creates a contradiction!'}
+    ]},
+
+  // ── CIVICS: CELESTIAL LIBRARY ────────────────────────────────
+  civics_library:{id:'civics_library',zone:'library',npc:'aldric',subject:'civics',icon:'🏛️',
+    title:'The Scrolls of Government',
+    lore:'Ancient scrolls in the library contain the secrets of good government — if you can decode them.',
+    reward:{type:'outfit',idx:2},
+    enemy:{name:'Bureaucracy Beast',em:'📋',hp:3},
+    variants:[
+      {q:'School rules exist to:',opts:['Be strict','Keep everyone safe and learning','Make the day longer','Punish students'],ans:1,ok:'Rules help everyone stay safe and learn effectively!'},
+      {q:'The Supreme Court\'s job is to:',opts:['Make laws','Lead the military','Interpret the Constitution and rule on whether laws are constitutional','Collect taxes'],ans:2,ok:'The judicial branch interprets laws and ensures they match the Constitution!'},
+      {q:'Separation of church and state means:',opts:['No one can be religious','The government cannot establish an official religion or interfere with religious practice','Churches pay no taxes','Clergy cannot vote'],ans:1,ok:'The Establishment Clause prevents government from endorsing or promoting any religion!'},
+      {q:'Tinker v. Des Moines (1969) established that:',opts:['Students have no rights at school','Students do not "shed constitutional rights at the schoolhouse gate"','Schools must teach civics','Teachers can search students'],ans:1,ok:'Students retain free speech rights at school — wearing protest armbands is protected expression!'},
+      {q:'The Voting Rights Act (1965) was designed to:',opts:['Give 18-year-olds voting rights','Eliminate discriminatory practices blocking Black Americans from voting','Establish the Electoral College','Allow women to vote'],ans:1,ok:'The VRA targeted literacy tests and other Jim Crow barriers to Black voter registration in the South!'},
+      {q:'Robert Dahl\'s pluralism argues American politics is best described as:',opts:['Dominated by a single elite','Competition among many interest groups with no single group monopolizing power','Pure class conflict','An inevitable oligarchy'],ans:1,ok:'Dahl\'s polyarchy model sees democracy as competition among multiple interest groups — a foundational political science theory!'}
+    ]},
+
+  // ── LOGIC: MOONLIT ACADEMY (missing from original) ───────────
+  acad_logic:{id:'acad_logic',zone:'academy',npc:'aldric',subject:'logic',icon:'🧩',
+    title:'The Final Logic Exam',
+    lore:'Professor Aldric\'s hardest logic exam stands between you and the Academy Fragment.',
+    reward:{type:'acc',idx:4},
+    enemy:{name:'Riddle Sphinx',em:'🦁',hp:4},
+    variants:[
+      {q:'Which is bigger: 7 × 8 or 6 × 9?',opts:['7 × 8 (56)','6 × 9 (54)','They are equal','Cannot determine'],ans:0,ok:'7 × 8 = 56 and 6 × 9 = 54. So 7 × 8 is bigger!'},
+      {q:'Two trains 300 miles apart travel toward each other at 60 mph and 90 mph. When do they meet?',opts:['After 1 hour','After 2 hours','After 3 hours','After 4 hours'],ans:1,ok:'Combined speed = 150 mph. Time = 300 ÷ 150 = 2 hours!'},
+      {q:'In a class of 30: 18 like math, 12 like science, 6 like both. How many like at least one?',opts:['24','27','30','36'],ans:0,ok:'Inclusion-exclusion: |M∪S| = 18 + 12 − 6 = 24!'},
+      {q:'The Monty Hall problem: after a goat is revealed, should you switch doors?',opts:['No, odds are 50/50','Yes, switching gives 2/3 chance of winning','No, original pick is better','It makes no difference'],ans:1,ok:'Switching wins 2/3 of the time! Your original door = 1/3; the remaining door absorbs the 2/3 probability!'},
+      {q:'In propositional logic, "if not-Q then not-P" is the ___ of "if P then Q":',opts:['Converse','Inverse','Contrapositive','Negation'],ans:2,ok:'The contrapositive (¬Q→¬P) is logically equivalent to the original (P→Q)!'},
+      {q:'Gödel\'s Incompleteness Theorem proves that any consistent formal system capable of arithmetic:',opts:['Is complete and consistent','Contains true statements that cannot be proven within the system','Can prove all mathematical truths','Is self-contradictory'],ans:1,ok:'Gödel (1931) shattered Hilbert\'s dream — some mathematical truths lie beyond formal proof!'}
+    ]},
+
+  // ── CIVICS: MOONLIT ACADEMY ──────────────────────────────────
+  civics_academy:{id:'civics_academy',zone:'academy',npc:'aldric',subject:'civics',icon:'🏛️',
+    title:'Aldric\'s Civics Final',
+    lore:'Professor Aldric\'s most demanding exam covers the full scope of American government.',
+    reward:{type:'outfit',idx:3},
+    enemy:{name:'Gridlock Golem',em:'🏛️',hp:4},
+    variants:[
+      {q:'A mayor\'s job is to:',opts:['Run a restaurant','Lead a city or town government','Teach school','Drive a bus'],ans:1,ok:'The mayor is the chief executive of a city or town!'},
+      {q:'How many senators does each US state have?',opts:['Depends on population','1','2','5'],ans:2,ok:'Every state has exactly 2 senators (100 total) — equal representation regardless of size!'},
+      {q:'The Equal Protection Clause (14th Amendment) was central to:',opts:['Ending slavery (13th Amendment)','Brown v. Board, Loving v. Virginia, and same-sex marriage equality','Freedom of speech (1st Amendment)','Voting rights (15th Amendment)'],ans:1,ok:'The Equal Protection Clause prohibits states from denying equal protection — used in landmark civil rights cases!'},
+      {q:'Citizens United v. FEC (2010) ruled that:',opts:['Corporations cannot donate to campaigns','Political spending by corporations is protected speech (unlimited)','All campaign donations must be disclosed','Voting must be expanded'],ans:1,ok:'Citizens United held political spending = free speech, allowing unlimited "outside" spending in elections!'},
+      {q:'Federalist No. 10 (Madison) argues a large republic is better because:',opts:['Large governments are efficient','Many factions cancel each other out, preventing any one from dominating','Citizens are more virtuous','Large republics have stronger militaries'],ans:1,ok:'Madison\'s insight: a large republic with many competing factions is more stable than a small one dominated by a majority faction!'},
+      {q:'Isaiah Berlin\'s "negative liberty" vs "positive liberty":',opts:['Negative is bad; positive is good','Negative = freedom FROM interference; positive = freedom TO act (having capacity/resources)','They are the same concept','Negative = economic; positive = political'],ans:1,ok:'Berlin\'s Two Concepts of Liberty (1958): negative liberty = absence of external constraints; positive liberty = having the actual capacity to act!'}
+    ]},
+
+  // ── READING: SHADOWMERE (missing from original) ──────────────
+  shadow_read:{id:'shadow_read',zone:'shadowmere',npc:'korrath',subject:'read',icon:'📖',
+    title:'Korrath\'s Dark Texts',
+    lore:'Korrath tests your literary mastery with texts from the darkest corners of the library.',
+    reward:{type:'hair',idx:4},
+    enemy:{name:'Dark Narrator',em:'🖋️',hp:4},
+    variants:[
+      {q:'Which word is the antonym of "benevolent"?',opts:['Kind','Malevolent','Generous','Wise'],ans:1,ok:'Benevolent = kind/generous. Malevolent = evil/harmful. They are antonyms!'},
+      {q:'A story\'s "resolution" is:',opts:['The main conflict','Where the conflict is resolved and loose ends tied up','The rising action','The climax'],ans:1,ok:'The resolution (denouement) follows the climax and concludes the story!'},
+      {q:'What is a "foil" character in literature?',opts:['The villain','A character who contrasts with the protagonist to highlight their qualities','The narrator','A minor background character'],ans:1,ok:'A foil\'s contrasting traits illuminate the protagonist\'s characteristics — Laertes is Hamlet\'s foil!'},
+      {q:'In "1984," the Party\'s slogan "War is Peace, Freedom is Slavery, Ignorance is Strength" is an example of:',opts:['Metaphor','Doublethink/doublespeak — using contradiction to suppress thought','Irony only','Foreshadowing'],ans:1,ok:'Orwell coined "doublethink" — holding contradictory beliefs simultaneously — to show totalitarian control of thought!'},
+      {q:'What is "magical realism"?',opts:['Science fiction set on Earth','A genre blending realistic settings with fantastical elements treated as ordinary','Horror writing','Surrealist poetry'],ans:1,ok:'Magical realism (García Márquez, Borges) integrates magical elements into realistic settings without treating them as extraordinary!'},
+      {q:'Mikhail Bakhtin\'s "dialogism" argues that:',opts:['Authors write in isolation','All language is shaped by others\' discourse — every utterance is dialogic','Texts have only one meaning','Literature reflects pure individual genius'],ans:1,ok:'Bakhtin: every word carries traces of others\' uses and anticipates responses — language is fundamentally social and dialogic!'}
+    ]},
+
+  // ── HISTORY: SHADOWMERE (missing from original) ──────────────
+  shadow_hist:{id:'shadow_hist',zone:'shadowmere',npc:'korrath',subject:'hist',icon:'🏛️',
+    title:'The Forgotten History',
+    lore:'Korrath guards suppressed historical truths. Only the truly learned may see them.',
+    reward:{type:'shoes',idx:3},
+    enemy:{name:'Revisionist Wraith',em:'📜',hp:4},
+    variants:[
+      {q:'The Pilgrims sailed to America on the:',opts:['Titanic','Mayflower','Santa Maria','Enterprise'],ans:1,ok:'The Pilgrims sailed the Mayflower to Plymouth, Massachusetts in 1620!'},
+      {q:'What triggered the stock market crash and Great Depression in 1929?',opts:['World War II','Overspeculation, bank failures, and collapsed stock prices','The Civil War aftermath','A trade war with Britain'],ans:1,ok:'The 1929 crash was caused by reckless speculation, overextended credit, and lack of market regulation!'},
+      {q:'The Cold War was primarily a conflict between:',opts:['USA and Germany','USA and China','USA and USSR','Britain and France'],ans:2,ok:'The Cold War (1947–1991) was the geopolitical rivalry between the USA and USSR — characterized by proxy wars, the arms race, and ideological competition!'},
+      {q:'The Nuremberg Trials (1945–46) were significant because:',opts:['They ended WWII','They established individual accountability for crimes against humanity under international law','They created NATO','They divided Germany'],ans:1,ok:'Nuremberg set the precedent that individuals — not just nations — can be criminally liable for genocide and war crimes!'},
+      {q:'The Truman Doctrine (1947) committed the US to:',opts:['Isolationism','Containing the spread of communism worldwide','Rebuilding Europe economically','Ending the Korean War'],ans:1,ok:'The Truman Doctrine pledged U.S. support to nations threatened by communist takeover — founding the containment policy!'},
+      {q:'Postcolonial theory (Said, Fanon) examines:',opts:['Pre-industrial economics','The cultural, psychological, and political effects of colonialism on colonized peoples','Medieval European history','Ancient Greek philosophy exclusively'],ans:1,ok:'Postcolonial theory analyzes how colonialism shaped identity and culture — Edward Said\'s "Orientalism" is foundational!'}
+    ]},
+
+  // ── CIVICS: SHADOWMERE ──────────────────────────────────────
+  civics_shadow:{id:'civics_shadow',zone:'shadowmere',npc:'korrath',subject:'civics',icon:'🏛️',
+    title:'Korrath\'s Government Trial',
+    lore:'Korrath tests whether you understand how power truly works in a democratic republic.',
+    reward:{type:'outfit',idx:4},
+    enemy:{name:'Shadow Senator',em:'⚔️',hp:5},
+    variants:[
+      {q:'What does a police officer\'s job include?',opts:['Making laws','Enforcing laws and keeping communities safe','Building roads','Running schools'],ans:1,ok:'Police officers protect communities and enforce the laws created by legislators!'},
+      {q:'What is a senator\'s role?',opts:['Member of the House of Representatives','One of two elected representatives each state sends to the US Senate','The president\'s assistant','A type of federal judge'],ans:1,ok:'Each state elects 2 senators (100 total) who serve 6-year terms in the upper chamber of Congress!'},
+      {q:'"Habeas corpus" protects:',opts:['Freedom of speech','The right not to be detained without being charged with a crime','Voting rights','Property rights'],ans:1,ok:'Habeas corpus (Latin: "you shall have the body") prevents unlawful imprisonment without formal charges — foundational to due process!'},
+      {q:'The War Powers Resolution (1973) requires:',opts:['A formal war declaration before any military action','The president to notify Congress within 48 hours of deploying troops and withdraw within 60 days without authorization','UN approval for military action','Only defensive wars'],ans:1,ok:'The War Powers Resolution (passed over Nixon\'s veto) limits presidential war powers — though presidents have often tested its constitutionality!'},
+      {q:'What does "due process" (5th and 14th Amendments) guarantee?',opts:['Free legal representation','Fair legal procedures before the government can deprive a person of life, liberty, or property','The right to a jury trial in all cases','Freedom from all searches'],ans:1,ok:'Due process = fair procedures. Substantive due process protects fundamental rights; procedural due process ensures fair legal processes!'},
+      {q:'Tocqueville\'s "tyranny of the majority" in Democracy in America warns that:',opts:['Military power is the greatest threat','Democratic majorities can suppress individual rights and impose social conformity','The president has too much power','Economic inequality alone destroys democracy'],ans:1,ok:'Tocqueville feared that in a democracy, the majority can oppress minorities and enforce conformity — a prescient warning about mass democracy\'s dangers!'}
     ]}
 };
 
