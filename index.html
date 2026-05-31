@@ -422,6 +422,62 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
   .class-grid{grid-template-columns:repeat(3,1fr);}
   .grade-grid{grid-template-columns:repeat(2,1fr);}
 }
+
+/* GRADUATION */
+.grad-overlay{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a0a2e,#3d0a4e,#0a1a3e);color:white;text-align:center;padding:2rem;gap:.8rem;}
+.grad-stars{font-size:2rem;letter-spacing:.5rem;animation:gradFloat 2s ease-in-out infinite;}
+.grad-badge{font-size:4rem;animation:gradFloat 2s ease-in-out infinite reverse;}
+.grad-title{font-family:'Playfair Display',serif;font-size:2.6rem;color:#fde68a;font-weight:700;}
+.grad-level{font-size:1.1rem;opacity:.9;line-height:1.6;}
+.grad-level strong{color:#fde68a;font-size:1.3rem;}
+.grad-next{font-size:.9rem;opacity:.65;font-style:italic;}
+@keyframes gradFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* MOBILE RESPONSIVE */
+@media(max-width:600px){
+  html,body{overflow:hidden;}
+  .scr{overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  #S_title{padding:30px 16px 80px;}
+  .t-logo{font-size:2rem;}
+  .t-btns{flex-direction:column;align-items:stretch;padding:0 20px;}
+  .t-btns .btn{width:100%;text-align:center;padding:16px 20px;font-size:.85rem;}
+  #S_create{padding:20px 12px 80px;}
+  .cc-card{padding:24px 18px;border-radius:16px;}
+  .class-grid{grid-template-columns:repeat(2,1fr);}
+  .grade-grid{grid-template-columns:1fr 1fr;gap:8px;}
+  .grade-pill{padding:14px 10px;font-size:.75rem;}
+  #S_game{flex-direction:column;}
+  .topbar{padding:10px 14px;}
+  .nav-tabs{position:fixed;bottom:0;left:0;right:0;z-index:100;background:white;border-top:1.5px solid var(--border-pink);display:flex;justify-content:space-around;padding:8px 0 max(8px,env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(168,85,247,.12);}
+  .nav-tab{flex:1;flex-direction:column;gap:2px;padding:8px 4px;font-size:.6rem;min-height:52px;}
+  .nav-tab-icon{font-size:1.3rem;display:block;}
+  .game-main{padding-bottom:80px;}
+  .game-sidebar{display:none;}
+  .zone-grid{grid-template-columns:1fr;}
+  .quest-list{gap:10px;}
+  .quest-card{padding:16px;}
+  .opts-grid{grid-template-columns:1fr;gap:10px;}
+  .opt-btn{padding:16px 14px;font-size:.95rem;min-height:52px;}
+  .battle-wrap{padding:16px;}
+  .ldb-list{gap:10px;}
+  .ldb-card{padding:14px;}
+  .map-wrap{overflow:auto;-webkit-overflow-scrolling:touch;cursor:grab;}
+  .map-inner{min-width:700px;min-height:400px;}
+  .map-hint{display:block;}
+  .char-tabs{gap:6px;}
+  .char-tab{padding:10px 12px;font-size:.7rem;}
+  .npc-dialogue{max-height:90vh;overflow-y:auto;}
+  .dialogue-choices{flex-direction:column;}
+  .dialogue-choice-btn{padding:14px;font-size:.85rem;min-height:48px;}
+  .battle-overlay{padding:16px;overflow-y:auto;}
+  .battle-enemy-em{font-size:3rem;}
+  .fi{font-size:16px;}
+  input,select,textarea{font-size:16px;}
+}
+@media(min-width:601px){
+  .map-hint{display:none;}
+  .nav-tab-icon{display:none;}
+}
 </style>
 </head>
 <body>
@@ -599,10 +655,10 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
   <div class="topbar">
     <div class="tb-logo">✦ Academy of the Starlet</div>
     <div class="tb-nav">
-      <button class="tnav on" id="tn-map" onclick="showView('map')">🌍 World</button>
-      <button class="tnav" id="tn-char" onclick="showView('char')">👤 Character</button>
-      <button class="tnav" id="tn-friends" onclick="showView('friends')">👥 Friends</button>
-      <button class="tnav" id="tn-puzzle" onclick="showView('puzzle')">🧩 Puzzle</button>
+      <button class="tnav on" id="tn-map" onclick="showView('map')"><span class="nav-tab-icon">🗺️</span>World</button>
+      <button class="tnav" id="tn-char" onclick="showView('char')"><span class="nav-tab-icon">👤</span>Character</button>
+      <button class="tnav" id="tn-friends" onclick="showView('friends')"><span class="nav-tab-icon">👥</span>Friends</button>
+      <button class="tnav" id="tn-puzzle" onclick="showView('puzzle')"><span class="nav-tab-icon">🧩</span>Puzzle</button>
     </div>
     <div class="tb-player">
       <div class="tb-av" id="tb-av">🔮</div>
@@ -613,6 +669,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
     </div>
   </div>
   <div class="xp-strip"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
+  <div id="screen" style="position:fixed;inset:0;z-index:200;pointer-events:none;"></div>
   <div id="frag-bar">
     <span class="frag-label">Codex:</span>
     <div class="frag-dot" id="fd0" title="Luminos Fragment"></div>
@@ -633,11 +690,13 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
           <div class="world-title">✦ The Starlet Realm</div>
           <div class="world-sub" id="map-sub">Find 7 Star Fragments to restore the Codex of Stars.</div>
         </div>
+        <div id="mapGradeBar"></div>
         <div class="map-container" id="mapContainer" style="min-height:460px;">
           <div class="map-stars" id="mapStars"></div>
           <svg class="map-svg" id="mapSVG" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
           <!-- Zone nodes injected by JS -->
         </div>
+        <div class="map-hint" style="text-align:center;color:#a855f7;font-size:.85rem;padding:6px 0;font-style:italic;">← Swipe to explore the map →</div>
         <div class="map-legend" id="mapLegend"></div>
         <div class="world-players-section" style="margin-top:16px;">
           <div class="section-label">Friends in this world</div>
@@ -860,45 +919,44 @@ const GRADE_ICONS=['🌱','🌿','🌟','⚡','🔮','🎓'];
 // ══════════════════════════════════════
 // ZONES
 // ══════════════════════════════════════
-const ZONES={
-  luminos:{id:'luminos',name:'Luminos Village',icon:'🏡',em:'🌸',color:'#ec4899',
-    bg:'linear-gradient(135deg,#fce7f3,#fdf2fb)',
-    desc:'A warm magical village where every flower hums with knowledge.',
-    quests:['math_v1','sci_v1','read_v1','hist_v1','logic_v1'],
-    unlockXP:0,pos:{left:'14%',top:'72%'},fragIdx:0},
-  caves:{id:'caves',name:'Crystal Caves',icon:'💎',em:'🔷',color:'#2dd4bf',
-    bg:'linear-gradient(135deg,#ccfbf1,#ecfeff)',
-    desc:'Glowing crystal tunnels echo with ancient riddles.',
-    quests:['math_v2','sci_v2','read_v2','hist_v2','logic_v2'],
-    unlockXP:50,pos:{left:'32%',top:'52%'},fragIdx:1},
-  library:{id:'library',name:'Celestial Library',icon:'📚',em:'🌙',color:'#8b5cf6',
-    bg:'linear-gradient(135deg,#ede9fe,#f5f3ff)',
-    desc:'A floating isle of infinite scrolls and starlit wisdom.',
-    quests:['math_v3','sci_v3','read_v3','hist_v3'],
-    unlockXP:100,pos:{left:'50%',top:'30%'},fragIdx:2},
-  academy:{id:'academy',name:'Moonlit Academy',icon:'🎓',em:'⚡',color:'#f59e0b',
-    bg:'linear-gradient(135deg,#fef3c7,#fffbeb)',
-    desc:'The grand school of Luminos, where true scholars are forged.',
-    quests:['math_v4','sci_v4','read_v4','hist_v4'],
-    unlockXP:150,pos:{left:'65%',top:'52%'},fragIdx:3},
-  shadowmere:{id:'shadowmere',name:'Shadowmere',icon:'🌑',em:'🌫️',color:'#7c3aed',
-    bg:'linear-gradient(135deg,#2e1065,#1e1b4b)',
-    desc:'Dark and misty — but knowledge can light even the deepest shadow.',
-    quests:['math_v5','sci_v5','logic_v5'],
-    unlockXP:200,pos:{left:'76%',top:'72%'},fragIdx:4},
-  void:{id:'void',name:'The Void Realm',icon:'🌌',em:'✨',color:'#3b82f6',
-    bg:'linear-gradient(135deg,#0f172a,#1e1b4b)',
-    desc:'A cosmic frontier where only the most learned may walk.',
-    quests:['math_v6','sci_v6'],
-    unlockXP:250,pos:{left:'84%',top:'38%'},fragIdx:5},
-  sanctum:{id:'sanctum',name:'Star Sanctum',icon:'⭐',em:'🌟',color:'#f59e0b',
-    bg:'linear-gradient(135deg,#1a0a2e,#3d0a4e,#0a1a3e)',
-    desc:'The birthplace of the Codex of Stars. The final trial awaits.',
-    quests:['logic_v6'],
-    unlockXP:300,pos:{left:'92%',top:'60%'},fragIdx:6,requiresAllFrags:true}
-};
-const ZONE_KEYS=['luminos','caves','library','academy','shadowmere','void','sanctum'];
-const MAP_PATHS=[['luminos','caves'],['caves','library'],['caves','academy'],['library','academy'],['library','void'],['academy','shadowmere'],['shadowmere','sanctum'],['void','sanctum']];
+const ZONES=[
+  // GRADE K-2 (gradeIdx:0)
+  {id:'luminos',name:'Luminos Village',icon:'🏡',em:'🌸',gradeIdx:0,color:'#ec4899',bg:'linear-gradient(135deg,#fce7f3,#fdf2fb)',desc:'A warm village where every flower hums with knowledge.',quests:['math_v1','sci_v1','read_v1','hist_v1','logic_v1','civics_luminos'],npc:'thornwood',mapX:10,mapY:72,fragIdx:0},
+  {id:'sunflower',name:'Sunflower Fields',icon:'🌻',em:'🌻',gradeIdx:0,color:'#f59e0b',bg:'linear-gradient(135deg,#fef3c7,#fffbeb)',desc:'Golden fields where math hides in every petal.',quests:['sun_math','sun_sci','sun_read','sun_hist','sun_logic','sun_civics'],npc:'stella',mapX:20,mapY:82,fragIdx:0},
+  {id:'pebble',name:'Pebble Creek',icon:'🌊',em:'💧',gradeIdx:0,color:'#22c55e',bg:'linear-gradient(135deg,#dcfce7,#f0fdf4)',desc:'A babbling brook with riddles in every ripple.',quests:['creek_math','creek_sci','creek_read','creek_hist','creek_logic','creek_civics'],npc:'mira',mapX:15,mapY:62,fragIdx:0},
+  // GRADE 3-5 (gradeIdx:1)
+  {id:'caves',name:'Crystal Caves',icon:'💎',em:'🔷',gradeIdx:1,color:'#2dd4bf',bg:'linear-gradient(135deg,#ccfbf1,#ecfeff)',desc:'Glowing tunnels echo with ancient riddles.',quests:['math_v2','sci_v2','read_v2','hist_v2','logic_v2','civics_caves'],npc:'mira',mapX:30,mapY:72,fragIdx:1},
+  {id:'stonehaven',name:'Stonehaven Town',icon:'🏘️',em:'⚙️',gradeIdx:1,color:'#84cc16',bg:'linear-gradient(135deg,#ecfccb,#f7fee7)',desc:'A bustling market town where knowledge is traded.',quests:['stone_math','stone_sci','stone_read','stone_hist','stone_logic','stone_civics'],npc:'thornwood',mapX:40,mapY:80,fragIdx:1},
+  {id:'windmill',name:'Windmill Heights',icon:'⚙️',em:'💨',gradeIdx:1,color:'#f97316',bg:'linear-gradient(135deg,#ffedd5,#fff7ed)',desc:'Towering windmills powered by ideas.',quests:['wind_math','wind_sci','wind_read','wind_hist','wind_logic','wind_civics'],npc:'solara',mapX:35,mapY:60,fragIdx:1},
+  // GRADE 6-8 (gradeIdx:2)
+  {id:'library',name:'Celestial Library',icon:'📚',em:'🌙',gradeIdx:2,color:'#8b5cf6',bg:'linear-gradient(135deg,#ede9fe,#f5f3ff)',desc:'A floating isle of infinite scrolls.',quests:['math_v3','sci_v3','read_v3','hist_v3','lib_logic','civics_library'],npc:'aldric',mapX:50,mapY:60,fragIdx:2},
+  {id:'harbor',name:'Cloud Harbor',icon:'⛵',em:'☁️',gradeIdx:2,color:'#06b6d4',bg:'linear-gradient(135deg,#cffafe,#ecfeff)',desc:'Ships sail clouds carrying wisdom.',quests:['harbor_math','harbor_sci','harbor_read','harbor_hist','harbor_logic','harbor_civics'],npc:'solara',mapX:58,mapY:72,fragIdx:2},
+  {id:'terrace',name:'Moon Terrace',icon:'🌙',em:'🌙',gradeIdx:2,color:'#a855f7',bg:'linear-gradient(135deg,#fae8ff,#fdf4ff)',desc:'A moonlit plaza where scholars debate.',quests:['terr_math','terr_sci','terr_read','terr_hist','terr_logic','terr_civics'],npc:'seraphina',mapX:54,mapY:46,fragIdx:2},
+  {id:'starbridge',name:'Star Bridge',icon:'🌉',em:'✨',gradeIdx:2,color:'#6366f1',bg:'linear-gradient(135deg,#e0e7ff,#eef2ff)',desc:'A bridge of starlight connecting knowledge realms.',quests:['bridge_math','bridge_sci','bridge_read','bridge_hist','bridge_logic','bridge_civics'],npc:'aldric',mapX:64,mapY:58,fragIdx:2},
+  // GRADE 9-10 (gradeIdx:3)
+  {id:'academy',name:'Moonlit Academy',icon:'🎓',em:'⚡',gradeIdx:3,color:'#f59e0b',bg:'linear-gradient(135deg,#fef3c7,#fffbeb)',desc:'The grand school of Luminos.',quests:['math_v4','sci_v4','read_v4','hist_v4','acad_logic','civics_academy'],npc:'aldric',mapX:72,mapY:64,fragIdx:3},
+  {id:'labyrinth',name:'The Labyrinth',icon:'🌀',em:'🗝️',gradeIdx:3,color:'#ef4444',bg:'linear-gradient(135deg,#fee2e2,#fff1f2)',desc:'Twisting paths test logic at every turn.',quests:['lab_math','lab_sci','lab_read','lab_hist','lab_logic','lab_civics'],npc:'korrath',mapX:78,mapY:74,fragIdx:3},
+  {id:'dragon',name:"Dragon's Peak",icon:'🐉',em:'🔥',gradeIdx:3,color:'#dc2626',bg:'linear-gradient(135deg,#1c1917,#292524)',desc:'Dragons guard ancient knowledge at this volcanic peak.',quests:['drag_math','drag_sci','drag_read','drag_hist','drag_logic','drag_civics'],npc:'seraphina',mapX:68,mapY:46,fragIdx:3},
+  // GRADE 11-12 (gradeIdx:4)
+  {id:'shadowmere',name:'Shadowmere',icon:'🌑',em:'🌫️',gradeIdx:4,color:'#7c3aed',bg:'linear-gradient(135deg,#2e1065,#1e1b4b)',desc:'Dark and misty — knowledge lights the deepest shadow.',quests:['math_v5','sci_v5','shadow_read','shadow_hist','logic_v5','civics_shadow'],npc:'korrath',mapX:78,mapY:30,fragIdx:4},
+  {id:'darksanctum',name:'Dark Sanctum',icon:'🕯️',em:'🗡️',gradeIdx:4,color:'#6d28d9',bg:'linear-gradient(135deg,#1e1b4b,#0c0a1e)',desc:'Ancient sanctum where forbidden knowledge waits.',quests:['ds_math','ds_sci','ds_read','ds_hist','ds_logic','ds_civics'],npc:'korrath',mapX:86,mapY:44,fragIdx:4},
+  {id:'voidgate',name:'The Void Gate',icon:'🌀',em:'🌀',gradeIdx:4,color:'#4c1d95',bg:'linear-gradient(135deg,#1e1b4b,#09090b)',desc:'A gate between knowledge and the unknown.',quests:['vg_math','vg_sci','vg_read','vg_hist','vg_logic','vg_civics'],npc:'seraphina',mapX:74,mapY:18,fragIdx:4},
+  {id:'tower',name:"Archmage's Tower",icon:'🗼',em:'🔭',gradeIdx:4,color:'#5b21b6',bg:'linear-gradient(135deg,#0c0a1e,#030712)',desc:'The tallest tower where the greatest minds studied.',quests:['tower_math','tower_sci','tower_read','tower_hist','tower_logic','tower_civics'],npc:'aldric',mapX:84,mapY:10,fragIdx:4},
+  // COLLEGE (gradeIdx:5)
+  {id:'cosmic',name:'Cosmic Sea',icon:'🌊',em:'🌌',gradeIdx:5,color:'#3b82f6',bg:'linear-gradient(135deg,#0f172a,#1e3a5f)',desc:'A sea of stars where cosmic truths drift.',quests:['cosm_math','cosm_sci','cosm_read','cosm_hist','cosm_logic','cosm_civics'],npc:'seraphina',mapX:55,mapY:20,fragIdx:5},
+  {id:'philo',name:"Philosopher's Isle",icon:'🏝️',em:'🦉',gradeIdx:5,color:'#0ea5e9',bg:'linear-gradient(135deg,#082f49,#0c4a6e)',desc:'Where philosophers have debated for eons.',quests:['phil_math','phil_sci','phil_read','phil_hist','phil_logic','phil_civics'],npc:'seraphina',mapX:44,mapY:10,fragIdx:5},
+  {id:'starsanctum',name:'Star Sanctum',icon:'⭐',em:'🌟',gradeIdx:5,color:'#f59e0b',bg:'linear-gradient(135deg,#1a0a2e,#3d0a4e)',desc:'The birthplace of the Codex of Stars. The final trial.',quests:['ss_math','ss_sci','ss_read','ss_hist','ss_logic','ss_civics'],npc:'stella',mapX:52,mapY:4,fragIdx:6,requiresAllFrags:true},
+];
+const ZONE_KEYS=ZONES.map(z=>z.id);
+const MAP_PATHS=[
+  ['luminos','sunflower'],['luminos','pebble'],['sunflower','pebble'],
+  ['pebble','caves'],['caves','stonehaven'],['caves','windmill'],['stonehaven','windmill'],
+  ['windmill','library'],['library','harbor'],['library','terrace'],['harbor','starbridge'],['terrace','starbridge'],
+  ['starbridge','academy'],['academy','labyrinth'],['academy','dragon'],['labyrinth','dragon'],
+  ['dragon','shadowmere'],['shadowmere','darksanctum'],['shadowmere','voidgate'],['darksanctum','tower'],['voidgate','tower'],
+  ['tower','cosmic'],['cosmic','philo'],['cosmic','starsanctum'],['philo','starsanctum'],
+];
+function getZone(id){return ZONES.find(z=>z.id===id);}
 
 // ══════════════════════════════════════
 // NPCS
@@ -1000,6 +1058,12 @@ const ACHIEVEMENTS=[
   {id:'grade_master',icon:'🎓',label:'Grade Master',desc:'Complete 3 quests of each subject',check:p=>checkSubjectMastery(p)},
   {id:'first_zone',icon:'🗺️',label:'World Traveler',desc:'Enter 3 different zones',check:p=>(p.zonesVisited||[]).length>=3},
   {id:'no_wrong',icon:'💎',label:'Perfect Scholar',desc:'Complete 5 quests with no wrong answers',check:p=>(p.perfectQuests||0)>=5},
+  {id:'grad_0',icon:'🌱',label:'K-2 Graduate',desc:'Mastered all K-2 Starling challenges!',check:p=>(p.currentGrade??0)>=1},
+  {id:'grad_1',icon:'🌿',label:'3-5 Graduate',desc:'Mastered all 3-5 Apprentice challenges!',check:p=>(p.currentGrade??0)>=2},
+  {id:'grad_2',icon:'🌟',label:'6-8 Graduate',desc:'Mastered all 6-8 Scholar challenges!',check:p=>(p.currentGrade??0)>=3},
+  {id:'grad_3',icon:'⚡',label:'9-10 Graduate',desc:'Mastered all 9-10 Mage challenges!',check:p=>(p.currentGrade??0)>=4},
+  {id:'grad_4',icon:'🔮',label:'11-12 Graduate',desc:'Mastered all 11-12 Archmage challenges!',check:p=>(p.currentGrade??0)>=5},
+  {id:'grad_5',icon:'🎓',label:'Luminos Sage',desc:'Mastered all College Sage challenges — a true Starlet!',check:p=>(p.currentGrade??0)>=5&&(p.donequests||[]).length>=20},
 ];
 
 // ══════════════════════════════════════
@@ -1396,7 +1460,7 @@ async function createChar(){
   if(!nm){showToast('Enter a name first!');return;}
   P={
     name:nm,cls:selClass,skin:selSkin,hairColor:selHairColor,hairStyle:selHairStyle,eyeColor:selEye,
-    grade:selGrade,
+    grade:selGrade,currentGrade:selGrade,
     xp:0,donequests:[],
     unlocked:['hair_0','outfit_0','acc_0','shoes_0'],
     equipped:{hair:0,outfit:0,acc:-1,shoes:0},
@@ -1417,6 +1481,7 @@ async function loadExisting(){
   if(!P){showToast('No saved character. Create one first!');goTo('S_create');return;}
   // Backfill new fields for old saves
   P.grade=P.grade??2;
+  if(P.currentGrade===undefined)P.currentGrade=P.grade??2;
   P.chapter=P.chapter??0;
   P.chaptersViewed=P.chaptersViewed||[];
   P.achievements=P.achievements||[];
@@ -1431,7 +1496,7 @@ async function loadExisting(){
 
 function makeCloudP(){
   return {name:P.name,cls:P.cls,skin:P.skin,hairColor:P.hairColor,hairStyle:P.hairStyle,
-    xp:P.xp,donequests:P.donequests,kudos:P.kudos,equipped:P.equipped,grade:P.grade,
+    xp:P.xp,donequests:P.donequests,kudos:P.kudos,equipped:P.equipped,grade:P.grade,currentGrade:P.currentGrade,
     fragments:P.fragments,achievements:P.achievements};
 }
 
@@ -1543,11 +1608,24 @@ async function loadTitlePlayers(){
 // ══════════════════════════════════════
 // WORLD MAP
 // ══════════════════════════════════════
+function buildGradeProgressBar(){
+  const el=document.getElementById('mapGradeBar');if(!el||!P)return;
+  const curGradeIdx=P.currentGrade??0;
+  const gradeZones=ZONES.filter(z=>z.gradeIdx===curGradeIdx);
+  const gradeQuests=gradeZones.flatMap(z=>z.quests).filter(qid=>QUESTS[qid]);
+  const doneCount=gradeQuests.filter(qid=>P.donequests.includes(qid)).length;
+  const totalCount=gradeQuests.length;
+  const pct=totalCount>0?Math.round(doneCount/totalCount*100):0;
+  const gradeName=GRADE_NAMES[curGradeIdx]||'Grade '+curGradeIdx;
+  el.innerHTML=`<div style="padding:8px 16px 4px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-size:.8rem;color:#a855f7;"><span>${gradeName} Progress</span><span>${doneCount}/${totalCount} quests (${pct}%)</span></div><div style="height:8px;background:rgba(168,85,247,.2);border-radius:4px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,#a855f7,#ec4899);border-radius:4px;transition:width .4s;"></div></div></div>`;
+}
+
 function renderMap(){
   buildMapStars();
   buildMapNodes();
   buildMapPaths();
   buildMapLegend();
+  buildGradeProgressBar();
   renderWorldPlayers();
   checkStoryTriggers();
 }
@@ -1567,7 +1645,7 @@ function buildMapNodes(){
   const container=document.getElementById('mapContainer');
   document.querySelectorAll('.map-node').forEach(n=>n.remove());
   ZONE_KEYS.forEach(zid=>{
-    const z=ZONES[zid];
+    const z=getZone(zid);if(!z)return;
     const locked=isZoneLocked(zid);
     const done=z.quests.filter(q=>P.donequests.includes(q)).length;
     const total=z.quests.length;
@@ -1576,9 +1654,10 @@ function buildMapNodes(){
     const node=document.createElement('div');
     node.className='map-node'+(locked?' locked':'')+(completed?' completed':'');
     node.id='mnode-'+zid;
-    node.style.left=z.pos.left;node.style.top=z.pos.top;
+    node.style.left=z.mapX+'%';node.style.top=z.mapY+'%';
     node.onclick=locked?null:()=>enterZone(zid);
-    const statusText=locked?('🔒 '+z.unlockXP+' XP'):(hasFragment?'⭐ Fragment!':(completed?'✓ Done':(done+'/'+total)));
+    const gradeLabel=GRADE_NAMES[z.gradeIdx]||'';
+    const statusText=locked?('🔒 '+gradeLabel):(hasFragment?'⭐ Fragment!':(completed?'✓ Done':(done+'/'+total)));
     node.innerHTML=`<div class="mnode-icon" style="text-shadow:0 0 12px ${z.color};">${z.icon}</div>
       <div class="mnode-name">${z.name}</div>
       <div class="mnode-status" style="color:${locked?'rgba(255,255,255,.3)':hasFragment?'var(--gold)':'rgba(255,255,255,.6)'};">${statusText}</div>`;
@@ -1592,10 +1671,10 @@ function buildMapPaths(){
   const container=document.getElementById('mapContainer');
   const cw=container.offsetWidth||400,ch=container.offsetHeight||460;
   MAP_PATHS.forEach(([a,b])=>{
-    const za=ZONES[a],zb=ZONES[b];
+    const za=getZone(a),zb=getZone(b);
     if(!za||!zb)return;
-    const x1=parseFloat(za.pos.left)/100*100,y1=parseFloat(za.pos.top)/100*100;
-    const x2=parseFloat(zb.pos.left)/100*100,y2=parseFloat(zb.pos.top)/100*100;
+    const x1=za.mapX,y1=za.mapY;
+    const x2=zb.mapX,y2=zb.mapY;
     const locked=isZoneLocked(a)||isZoneLocked(b);
     const line=document.createElementNS('http://www.w3.org/2000/svg','line');
     line.setAttribute('x1',x1);line.setAttribute('y1',y1);
@@ -1613,7 +1692,7 @@ function buildMapLegend(){
     <div style="color:rgba(255,255,255,.5);font-size:.55rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px;">Zones</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;">
     ${ZONE_KEYS.map(zid=>{
-      const z=ZONES[zid];const locked=isZoneLocked(zid);
+      const z=getZone(zid);const locked=isZoneLocked(zid);
       return `<div class="map-leg-item" style="opacity:${locked?.5:1};">${z.icon} ${z.name}${locked?' 🔒':''}</div>`;
     }).join('')}
     </div>
@@ -1621,10 +1700,10 @@ function buildMapLegend(){
 }
 
 function isZoneLocked(zid){
-  const z=ZONES[zid];
+  const z=getZone(zid);
   if(!z)return true;
-  if(z.requiresAllFrags)return P.fragments.filter(Boolean).length<7;
-  return P.xp<z.unlockXP;
+  if(z.requiresAllFrags&&!(P.fragments||[]).every(Boolean))return true;
+  return z.gradeIdx>P.currentGrade;
 }
 
 async function renderWorldPlayers(){
@@ -1648,8 +1727,11 @@ async function renderWorldPlayers(){
 let curZone=null;
 
 function enterZone(zid){
-  const z=ZONES[zid];if(!z)return;
-  if(isZoneLocked(zid)){showToast('Need '+z.unlockXP+' XP to unlock!');return;}
+  const z=getZone(zid);if(!z)return;
+  if(isZoneLocked(zid)){
+    const gradeNeeded=GRADE_NAMES[z.gradeIdx];
+    showToast(`🔒 Complete ${gradeNeeded} first!`);return;
+  }
   curZone=z;
   if(!P.zonesVisited.includes(zid)){P.zonesVisited.push(zid);cloudSave();}
   showView('zone');
@@ -1670,8 +1752,9 @@ function autoNpcGreeting(zid){
   const npcId=Object.keys(NPCS).find(id=>NPCS[id].zone===zid);
   if(!npcId)return;
   const npc=NPCS[npcId];
-  const doneInZone=ZONES[zid].quests.filter(q=>P.donequests.includes(q)).length;
-  const ctx=doneInZone>=ZONES[zid].quests.length?'post':doneInZone>0?'mid':'greeting';
+  const zForGreeting=getZone(zid);if(!zForGreeting)return;
+  const doneInZone=zForGreeting.quests.filter(q=>P.donequests.includes(q)).length;
+  const ctx=doneInZone>=zForGreeting.quests.length?'post':doneInZone>0?'mid':'greeting';
   const line=npc.lines[ctx][0];
   setDialogue(npc.name,line,`<button class="btn btn-outline btn-sm" onclick="openNpcOverlay('${npcId}')">💬 Talk to ${npc.name}</button>`);
 }
@@ -1858,10 +1941,57 @@ async function grantReward(q,bonusXP=0){
   showModal(r.e,r.n+' Unlocked!',`Quest complete! "${q.title}" — you earned ${r.e} ${r.n}! +${xpGained} XP added.`);
   if(curZone)renderZoneQuests();
   checkStoryTriggers();
+  checkGraduation();
+}
+
+function grantAchievement(id){
+  if(!P.achievements)P.achievements=[];
+  if(!P.achievements.includes(id))P.achievements.push(id);
+}
+
+function checkGraduation(){
+  if(!P||(P.currentGrade??0)>=5)return;
+  const gradeZones=ZONES.filter(z=>z.gradeIdx===(P.currentGrade??0));
+  const needed=gradeZones.flatMap(z=>z.quests);
+  // only check quests that exist in QUESTS
+  const existing=needed.filter(qid=>QUESTS[qid]);
+  if(existing.length===0)return;
+  if(existing.every(qid=>P.donequests.includes(qid))){
+    showGraduation();
+  }
+}
+function showGraduation(){
+  const names=['K–2 Starling','3–5 Apprentice','6–8 Scholar','9–10 Mage','11–12 Archmage','College Sage'];
+  const next=names[(P.currentGrade??0)+1]||'Master';
+  const scr=document.getElementById('screen');
+  if(!scr){
+    showModal('🎓','Congratulations!',`You mastered all ${names[P.currentGrade??0]} challenges! The ${next} realm now awakens…`);
+    setTimeout(()=>{closeModal();advanceGrade();},3000);
+    return;
+  }
+  scr.style.pointerEvents='auto';
+  scr.innerHTML=`<div class="grad-overlay">
+    <div class="grad-stars">🌟✨⭐💫🌠✨🌟</div>
+    <div class="grad-badge">🎓</div>
+    <h1 class="grad-title">Congratulations!</h1>
+    <p class="grad-level">You mastered all<br><strong>${names[P.currentGrade??0]}</strong> challenges!</p>
+    <p class="grad-next">The <em>${next}</em> realm now awakens…</p>
+    <button class="btn btn-gold" onclick="advanceGrade()" style="margin-top:1.5rem;padding:16px 40px;font-size:1rem;">Advance to ${next} →</button>
+  </div>`;
+  spawnParticles&&spawnParticles();
+}
+async function advanceGrade(){
+  P.currentGrade=Math.min((P.currentGrade??0)+1,5);
+  grantAchievement('grad_'+(P.currentGrade-1));
+  P.xp+=50;updateXP();
+  await cloudSave();
+  const scr=document.getElementById('screen');
+  if(scr){scr.innerHTML='';scr.style.pointerEvents='none';}
+  showView('map');
 }
 
 function checkZoneFragment(zoneId){
-  const z=ZONES[zoneId];if(!z)return;
+  const z=getZone(zoneId);if(!z)return;
   const allDone=z.quests.every(q=>P.donequests.includes(q));
   if(allDone&&!P.fragments[z.fragIdx]){
     P.fragments[z.fragIdx]=true;
@@ -1903,8 +2033,9 @@ let curNpcId=null,npcLineIdx=0;
 function openNpcOverlay(npcId){
   const npc=NPCS[npcId];if(!npc)return;
   curNpcId=npcId;npcLineIdx=0;
-  const doneInZone=curZone?ZONES[curZone.id]?.quests.filter(q=>P.donequests.includes(q)).length:0;
-  const totalInZone=curZone?ZONES[curZone.id]?.quests.length:1;
+  const npcZone=curZone?getZone(curZone.id):null;
+  const doneInZone=npcZone?npcZone.quests.filter(q=>P.donequests.includes(q)).length:0;
+  const totalInZone=npcZone?npcZone.quests.length:1;
   const ctx=doneInZone>=totalInZone?'post':doneInZone>0?'mid':'greeting';
   document.getElementById('npc-em').textContent=npc.em;
   document.getElementById('npc-name').textContent=npc.name;
@@ -1915,8 +2046,9 @@ function openNpcOverlay(npcId){
 
 function npcTalkMore(){
   const npc=NPCS[curNpcId];if(!npc)return;
-  const doneInZone=curZone?ZONES[curZone.id]?.quests.filter(q=>P.donequests.includes(q)).length:0;
-  const totalInZone=curZone?ZONES[curZone.id]?.quests.length:1;
+  const npcZone2=curZone?getZone(curZone.id):null;
+  const doneInZone=npcZone2?npcZone2.quests.filter(q=>P.donequests.includes(q)).length:0;
+  const totalInZone=npcZone2?npcZone2.quests.length:1;
   const ctx=doneInZone>=totalInZone?'post':doneInZone>0?'mid':'greeting';
   const lines=npc.lines[ctx];
   npcLineIdx=(npcLineIdx+1)%lines.length;
@@ -2050,7 +2182,7 @@ function renderCharRight(){
       <div style="margin-bottom:12px;">
         <div style="font-size:.58rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">Star Fragments (${(P.fragments||[]).filter(Boolean).length}/7)</div>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
-          ${ZONE_KEYS.map((zid,i)=>{const z=ZONES[zid];const got=P.fragments[i];return`<div style="text-align:center;padding:6px 8px;background:${got?'var(--gold-pale)':'var(--lavender-light)'};border:1.5px solid ${got?'var(--gold)':'var(--border)'};border-radius:10px;font-size:.62rem;font-weight:700;color:${got?'#78350f':'var(--muted)'};">${got?'⭐':'○'}<br>${z.icon}</div>`;}).join('')}
+          ${ZONE_KEYS.map((zid,i)=>{const z=getZone(zid);const got=P.fragments[i];return`<div style="text-align:center;padding:6px 8px;background:${got?'var(--gold-pale)':'var(--lavender-light)'};border:1.5px solid ${got?'var(--gold)':'var(--border)'};border-radius:10px;font-size:.62rem;font-weight:700;color:${got?'#78350f':'var(--muted)'};">${got?'⭐':'○'}<br>${z?z.icon:'?'}</div>`;}).join('')}
         </div>
       </div>
       <div style="font-size:.58rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Chapters Viewed (${(P.chaptersViewed||[]).length}/7)</div>
@@ -2249,7 +2381,7 @@ async function renderSidebar(){
     </div>`).join('');
   } else if(curRS==='fragments'){
     el.innerHTML=`<div style="font-family:'Playfair Display',serif;font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:12px;">⭐ Codex of Stars</div>
-      ${ZONE_KEYS.map((zid,i)=>{const z=ZONES[zid];const got=P&&P.fragments&&P.fragments[i];return`<div class="mini-act">
+      ${ZONE_KEYS.map((zid,i)=>{const z=getZone(zid);const got=P&&P.fragments&&P.fragments[i];return`<div class="mini-act">
         <div class="mini-act-av">${got?'⭐':'○'}</div>
         <div><div class="mini-act-text" style="color:${got?'var(--ink)':'var(--muted)'};">${z.icon} ${z.name}</div>
         <div style="font-size:.52rem;color:var(--muted);">${got?'Fragment collected!':'Complete all '+z.quests.length+' quests'}</div></div>
@@ -2327,6 +2459,7 @@ function spawnParticles(){
 P=LS.get('player');
 if(P){
   P.grade=P.grade??2;P.chapter=P.chapter??0;
+  if(P.currentGrade===undefined)P.currentGrade=P.grade??2;
   P.chaptersViewed=P.chaptersViewed||[];P.achievements=P.achievements||[];
   P.spells=P.spells||[];P.fragments=P.fragments||[false,false,false,false,false,false,false];
   P.zonesVisited=P.zonesVisited||[];P.perfectQuests=P.perfectQuests||0;
