@@ -1560,6 +1560,210 @@ const QUESTS={
       {q:'The War Powers Resolution (1973) requires:',opts:['A formal war declaration before any military action','The president to notify Congress within 48 hours of deploying troops and withdraw within 60 days without authorization','UN approval for military action','Only defensive wars'],ans:1,ok:'The War Powers Resolution (passed over Nixon\'s veto) limits presidential war powers — though presidents have often tested its constitutionality!'},
       {q:'What does "due process" (5th and 14th Amendments) guarantee?',opts:['Free legal representation','Fair legal procedures before the government can deprive a person of life, liberty, or property','The right to a jury trial in all cases','Freedom from all searches'],ans:1,ok:'Due process = fair procedures. Substantive due process protects fundamental rights; procedural due process ensures fair legal processes!'},
       {q:'Tocqueville\'s "tyranny of the majority" in Democracy in America warns that:',opts:['Military power is the greatest threat','Democratic majorities can suppress individual rights and impose social conformity','The president has too much power','Economic inequality alone destroys democracy'],ans:1,ok:'Tocqueville feared that in a democracy, the majority can oppress minorities and enforce conformity — a prescient warning about mass democracy\'s dangers!'}
+    ]},
+
+  // ── SUNFLOWER FIELDS ─────────────────────────────────────────
+  sun_math:{id:'sun_math',zone:'sunflower',npc:'stella',subject:'math',icon:'🔢',
+    title:'Petal Counting',lore:'The sunflowers need a mathematician to count their petals and arrange them in perfect patterns!',
+    reward:{type:'acc',idx:1},enemy:{name:'Number Bee',em:'🐝',hp:2},
+    variants:[
+      {q:'Count the sunflowers: 🌻🌻🌻🌻🌻🌻. How many?',opts:['4','5','6','7'],ans:2,ok:'6 sunflowers — great counting!'},
+      {q:'A field has 6 rows of 7 sunflowers. How many total?',opts:['36','42','48','56'],ans:1,ok:'6 × 7 = 42 sunflowers!'},
+      {q:'A sunflower field is 15m long and 8m wide. What is its area?',opts:['90m²','100m²','120m²','180m²'],ans:2,ok:'Area = 15 × 8 = 120m²!'},
+      {q:'Petal lengths follow: 2, 6, 18, 54... What is the pattern?',opts:['Add 4','Multiply by 3','Add 12','Multiply by 2'],ans:1,ok:'Geometric sequence with ratio r = 3!'},
+      {q:'An infinite geometric series: a = 2, r = ⅓. What is the sum?',opts:['2','3','4','6'],ans:1,ok:'Sum = a/(1−r) = 2/(1−⅓) = 2/(2/3) = 3!'},
+      {q:'∫₀⁴ √x dx equals:',opts:['8/3','16/3','4','8'],ans:1,ok:'[2x^(3/2)/3]₀⁴ = 2(8)/3 = 16/3!'}
+    ]},
+  sun_sci:{id:'sun_sci',zone:'sunflower',npc:'stella',subject:'sci',icon:'🌿',
+    title:'Field Ecology',lore:'The field ecosystem is out of balance. Help Stella restore harmony between the creatures!',
+    reward:{type:'shoes',idx:1},enemy:{name:'Pest Sprite',em:'🐛',hp:2},
+    variants:[
+      {q:'What do bees do when they visit flowers?',opts:['Eat the petals','Spread pollen, helping flowers reproduce','Drink all the water','Cut the stems'],ans:1,ok:'Bees are pollinators — they spread pollen between flowers, enabling reproduction!'},
+      {q:'What is a food chain?',opts:['A grocery store layout','The order in which organisms eat each other in an ecosystem','A type of farming','A plant\'s root system'],ans:1,ok:'A food chain shows who eats whom — energy flows from producers to consumers!'},
+      {q:'In an ecosystem, what does a "decomposer" do?',opts:['Produces energy from sunlight','Breaks down dead organisms and recycles nutrients into the soil','Hunts prey','Pollinates flowers'],ans:1,ok:'Decomposers (fungi, bacteria) break down dead matter and return nutrients to the soil — essential recyclers!'},
+      {q:'Which type of symbiosis benefits BOTH organisms involved?',opts:['Parasitism','Commensalism','Mutualism','Competition'],ans:2,ok:'Mutualism benefits both — like bees and flowers, or clownfish and sea anemones!'},
+      {q:'The nitrogen cycle is critical because nitrogen:',opts:['Creates oxygen','Makes water','Is essential for DNA, RNA, and proteins — the building blocks of life','Produces energy directly'],ans:2,ok:'Nitrogen is needed for amino acids and nucleotides — without it, life cannot build proteins or genetic material!'},
+      {q:'In population ecology, logistic growth (dN/dt = rN(K−N)/K) — K represents:',opts:['Growth rate','Carrying capacity — the maximum sustainable population','Initial population size','Death rate'],ans:1,ok:'K = carrying capacity — the population size an environment can sustainably support!'}
+    ]},
+  sun_read:{id:'sun_read',zone:'sunflower',npc:'stella',subject:'read',icon:'📖',
+    title:'Stories in the Fields',lore:'The sunflowers whisper forgotten stories. Help Stella piece them back together!',
+    reward:{type:'hair',idx:1},enemy:{name:'Word Weevil',em:'📝',hp:2},
+    variants:[
+      {q:'What is a noun?',opts:['An action word','A describing word','A person, place, or thing','A connecting word'],ans:2,ok:'Nouns name people (Maria), places (Paris), and things (book)!'},
+      {q:'Which sentence uses correct punctuation?',opts:['Lets go to the park','Let\'s go to the park!','Lets\' go to the park?','Let\'s, go to the park'],ans:1,ok:'"Let\'s" is a contraction of "let us" and needs an apostrophe!'},
+      {q:'What is the difference between a metaphor and a simile?',opts:['No difference','A simile uses "like" or "as"; a metaphor says something IS something else','Metaphors rhyme; similes don\'t','Similes are always longer'],ans:1,ok:'Simile: "brave AS a lion." Metaphor: "he IS a lion" — no "like" or "as"!'},
+      {q:'In "To Kill a Mockingbird," Scout\'s narrative perspective is significant because:',opts:['She is an adult lawyer','Her childhood innocence makes racial injustice more visible to readers','She is the antagonist','She is omniscient'],ans:1,ok:'Scout\'s naive perspective defamiliarizes the racism adults take for granted, making it more visible and shocking!'},
+      {q:'What is "stream of consciousness" writing?',opts:['Writing about rivers','Capturing the unfiltered flow of a character\'s inner thoughts without editing','Writing only dialogue','A type of sonnet'],ans:1,ok:'Stream of consciousness (Virginia Woolf, James Joyce) represents thought as it actually flows — fragmentary and associative!'},
+      {q:'New Criticism (Wimsatt & Beardsley) argues literary analysis should focus on:',opts:['Author\'s biography and intent','Close reading of the text itself, regardless of authorial intent','Historical and social context','Psychoanalytic character analysis'],ans:1,ok:'New Criticism introduced "the intentional fallacy" — the text itself, not the author\'s intent, is what matters!'}
+    ]},
+  sun_hist:{id:'sun_hist',zone:'sunflower',npc:'thornwood',subject:'hist',icon:'🏛️',
+    title:'Harvest Through History',lore:'The fields have seen centuries of history. Can you identify the key moments?',
+    reward:{type:'outfit',idx:1},enemy:{name:'Time Sprite',em:'⏳',hp:2},
+    variants:[
+      {q:'What do we celebrate on Thanksgiving?',opts:['Independence from Britain','The Pilgrims\' first harvest and their alliance with the Wampanoag people','New Year\'s Day','The Constitution being signed'],ans:1,ok:'Thanksgiving (1621) commemorates the Pilgrims\' first harvest, shared with the Wampanoag who helped them survive!'},
+      {q:'What is a democracy?',opts:['A country ruled by a king','A system where citizens vote and have power in government','A military government','A one-party system'],ans:1,ok:'Democracy means the people hold power — either directly or through elected representatives!'},
+      {q:'The Industrial Revolution (late 1700s–1800s) began in:',opts:['France','Britain','America','Germany'],ans:1,ok:'Britain pioneered industrialization — steam power, textile mills, and railways transformed society starting in the 1760s!'},
+      {q:'FDR\'s New Deal (1930s) responded to:',opts:['World War II','The Great Depression — providing relief, recovery, and economic reform','The Civil War aftermath','The Cold War'],ans:1,ok:'The New Deal created jobs (CCC, WPA), regulated banks (FDIC), and established Social Security to combat the Depression!'},
+      {q:'The Marshall Plan (1948) provided:',opts:['Military alliances (NATO)','U.S. economic aid to rebuild postwar Western Europe','A Korean War strategy','Nuclear deterrence'],ans:1,ok:'The Marshall Plan invested $13 billion to rebuild European economies and prevent communist expansion — it worked!'},
+      {q:'Max Weber\'s concept of "bureaucracy" describes:',opts:['Government corruption','Rational, rule-based organizational authority as the foundation of modern states','Military power structures','Economic inequality systems'],ans:1,ok:'Weber saw bureaucracy as rational-legal authority — impersonal rules replacing personal loyalty in modern governance!'}
+    ]},
+  sun_logic:{id:'sun_logic',zone:'sunflower',npc:'stella',subject:'logic',icon:'🧩',
+    title:'Petal Patterns',lore:'The sunflowers arrange themselves in mathematical patterns. Decode them!',
+    reward:{type:'acc',idx:2},enemy:{name:'Chaos Beetle',em:'🪲',hp:2},
+    variants:[
+      {q:'What comes next? 🌸🌸🌼🌸🌸🌼🌸🌸___',opts:['🌸','🌼','🌻','⭐'],ans:1,ok:'The pattern 🌸🌸🌼 repeats — next is 🌼!'},
+      {q:'What comes next: 3, 6, 9, 12, ___?',opts:['13','14','15','16'],ans:2,ok:'Counting by 3s: 12 + 3 = 15!'},
+      {q:'What is the next prime number after 17?',opts:['18','19','20','21'],ans:1,ok:'19 is prime — divisible only by 1 and itself!'},
+      {q:'A bag has 4 red, 3 blue, 3 green marbles. What is P(red)?',opts:['4/10','3/10','4/7','1/4'],ans:0,ok:'P(red) = 4/10 = 2/5. There are 10 marbles total, 4 are red!'},
+      {q:'Two independent events: P(A)=0.3, P(B)=0.4. P(A∩B)=?',opts:['0.7','0.12','0.1','0.34'],ans:1,ok:'For independent events: P(A∩B) = P(A) × P(B) = 0.3 × 0.4 = 0.12!'},
+      {q:'Bayes\' theorem P(A|B) = P(B|A)P(A)/P(B) is used to:',opts:['Find basic probability','Update probability estimates based on new evidence','Calculate standard deviation','Find a median'],ans:1,ok:'Bayes\' theorem lets us update our prior beliefs (P(A)) when we get new evidence (P(B|A)) — foundational in statistics and AI!'}
+    ]},
+  sun_civics:{id:'sun_civics',zone:'sunflower',npc:'stella',subject:'civics',icon:'🏛️',
+    title:'Field Day Democracy',lore:'The field animals want to vote on what crops to plant. Teach them how democracy works!',
+    reward:{type:'shoes',idx:2},enemy:{name:'Ballot Ghost',em:'🗳️',hp:2},
+    variants:[
+      {q:'How do Americans choose their president?',opts:['The strongest person wins','Citizens vote','A king decides','Random drawing'],ans:1,ok:'Americans vote! The person who wins the Electoral College becomes president.'},
+      {q:'What is the purpose of the Constitution?',opts:['To write history','To establish rules of government and protect citizens\' rights','To list all laws','To plan wars'],ans:1,ok:'The Constitution is the supreme law of the land — it creates government structure and guarantees rights!'},
+      {q:'How does a bill become a law?',opts:['President writes it; Congress votes','Congress passes it; President signs or vetoes it','Supreme Court approves; Congress votes','Governor writes it; President approves'],ans:1,ok:'Congress passes bills (both House and Senate must agree), then the President signs or vetoes!'},
+      {q:'The Electoral College is:',opts:['A school for politicians','The system of state electors that formally elects the US president','A committee that writes laws','The Supreme Court\'s advisory board'],ans:1,ok:'Each state gets electors (based on congressional seats). 270 of 538 electoral votes are needed to win the presidency!'},
+      {q:'The 14th Amendment (1868) is significant because it:',opts:['Abolished slavery (that\'s the 13th)','Granted citizenship and equal protection to all born in the US','Gave women the right to vote (that\'s the 19th)','Ended Prohibition (that\'s the 21st)'],ans:1,ok:'The 14th Amendment granted citizenship to formerly enslaved people and established equal protection under the law!'},
+      {q:'John Locke\'s social contract argues governments derive legitimacy from:',opts:['Divine right of kings','Consent of the governed — citizens may overthrow governments that fail to protect rights','Military strength','Economic productivity'],ans:1,ok:'Locke\'s Second Treatise directly influenced the Declaration of Independence — Jefferson borrowed his language of natural rights and consent!'}
+    ]},
+
+  // ── PEBBLE CREEK ─────────────────────────────────────────────
+  creek_math:{id:'creek_math',zone:'pebble',npc:'mira',subject:'math',icon:'🔢',
+    title:'Counting Stones',lore:'The river stones form mysterious number patterns. Help Mira catalog them!',
+    reward:{type:'acc',idx:2},enemy:{name:'Current Sprite',em:'💧',hp:2},
+    variants:[
+      {q:'How many sides does a square have?',opts:['2','3','4','5'],ans:2,ok:'A square has 4 equal sides and 4 right angles!'},
+      {q:'What is ½ as a decimal?',opts:['0.2','0.5','1.2','2.0'],ans:1,ok:'½ = 1 ÷ 2 = 0.5!'},
+      {q:'A creek flows at 3 km/hour. How far does it flow in 2.5 hours?',opts:['6 km','7.5 km','8 km','9 km'],ans:1,ok:'Distance = rate × time = 3 × 2.5 = 7.5 km!'},
+      {q:'Solve: |2x − 4| = 6',opts:['x = 5 only','x = −1 only','x = 5 or x = −1','x = 4 or x = −2'],ans:2,ok:'2x−4=6 → x=5; AND 2x−4=−6 → x=−1. Both solutions!'},
+      {q:'Find the area between y = x² and y = x from 0 to 1:',opts:['⅙','⅓','½','1'],ans:0,ok:'∫₀¹(x − x²)dx = [x²/2 − x³/3]₀¹ = ½ − ⅓ = ⅙!'},
+      {q:'The second derivative test: if f\'\'(c) > 0 at a critical point, f(c) is:',opts:['A local maximum','A local minimum','An inflection point','Undefined'],ans:1,ok:'f\'\'(c) > 0 means concave up — the function curves upward, so it\'s a local minimum!'}
+    ]},
+  creek_sci:{id:'creek_sci',zone:'pebble',npc:'mira',subject:'sci',icon:'🌿',
+    title:'River Ecosystem',lore:'The creek\'s ecosystem is struggling. Help Mira understand the science behind it!',
+    reward:{type:'hair',idx:2},enemy:{name:'Mud Monster',em:'🌊',hp:2},
+    variants:[
+      {q:'Where do fish live?',opts:['In trees','Underground','In water','In the sky'],ans:2,ok:'Fish live in water — rivers, lakes, ponds, and oceans!'},
+      {q:'What does "habitat" mean?',opts:['A bad habit','The natural home environment of an animal or plant','A type of severe weather','A predator-prey relationship'],ans:1,ok:'Habitat is where a species naturally lives — the place that provides food, shelter, and conditions for survival!'},
+      {q:'River erosion occurs because:',opts:['Wind blows soil away','Moving water wears away rock and soil over time','Plants absorb all the soil','Temperature extremes crack rocks only'],ans:1,ok:'Water erosion: moving water carries away sediment — rivers carve valleys and canyons over millions of years (like the Grand Canyon)!'},
+      {q:'In the water cycle, "condensation" is:',opts:['Water evaporating from oceans','Water vapor cooling and becoming liquid droplets (forming clouds and dew)','Rain falling to Earth','Water flowing downhill in rivers'],ans:1,ok:'Condensation: water vapor cools and becomes liquid — water molecules slow down and cluster into droplets!'},
+      {q:'Bernoulli\'s principle in fluid dynamics states:',opts:['Faster-moving fluid has higher pressure','Faster-moving fluid has lower pressure','Fluid pressure is always uniform','Density always increases with flow speed'],ans:1,ok:'Bernoulli: where fluid speeds up, pressure drops — this is why airplane wings generate lift and why baseballs curve!'},
+      {q:'The Navier-Stokes equations describe:',opts:['Quantum particle behavior','The motion of viscous fluid substances — one of the great unsolved problems in mathematics','Electromagnetic field behavior','Thermodynamic state changes'],ans:1,ok:'Navier-Stokes governs fluid dynamics — from blood flow to weather patterns. Their general solution remains an unsolved Millennium Prize Problem!'}
+    ]},
+  creek_read:{id:'creek_read',zone:'pebble',npc:'mira',subject:'read',icon:'📖',
+    title:'Pebble Creek Poems',lore:'Mira discovered ancient poems written on the creek stones. Can you decode their literary secrets?',
+    reward:{type:'shoes',idx:2},enemy:{name:'Babble Beast',em:'📖',hp:2},
+    variants:[
+      {q:'A poem with words that sound alike at the end of lines is called:',opts:['A narrative poem','A rhyming poem','A haiku','Free verse'],ans:1,ok:'Rhyming poems have end rhymes — words that share the same sound (moon/June, flow/know)!'},
+      {q:'What does the prefix "pre-" mean?',opts:['After','Against','Before','Together'],ans:2,ok:'"Pre-" means before: preview (view before), predict (say before), prehistoric (before written history)!'},
+      {q:'Alliteration is:',opts:['A type of rhyme at the end of lines','Repetition of the same beginning consonant sound in nearby words','Comparing two things using "like"','Exaggeration for effect'],ans:1,ok:'"Peter Piper picked peppers" — alliteration repeats the initial consonant sound!'},
+      {q:'Iambic pentameter is:',opts:['5 stressed syllables per line','10 syllables alternating unstressed/stressed (da-DUM × 5)','Free verse with exactly 10 lines','Rhyming couplets of exactly 5 words each'],ans:1,ok:'Iambic pentameter: da-DUM da-DUM da-DUM da-DUM da-DUM — Shakespeare\'s default meter!'},
+      {q:'An "epigraph" at the start of a novel serves to:',opts:['Summarize the plot','Set theme or tone through a quotation','List the characters','Provide the author\'s biography'],ans:1,ok:'Epigraphs (like the verse opening Gatsby) hint at themes before the story begins!'},
+      {q:'Derrida\'s deconstruction argues that texts:',opts:['Have one clear, stable meaning','Are inherently unstable — meaning is always deferred and contradictory','Always reflect the author\'s biography clearly','Contain absolute truths we can access through close reading'],ans:1,ok:'Deconstruction reveals how texts undermine their own claims — binary oppositions collapse, and meaning is always deferred (différance)!'}
+    ]},
+  creek_hist:{id:'creek_hist',zone:'pebble',npc:'mira',subject:'hist',icon:'🏛️',
+    title:'Flowing Through Time',lore:'The creek has witnessed centuries of history. Identify the key events it has seen!',
+    reward:{type:'outfit',idx:1},enemy:{name:'History Flood',em:'🌀',hp:2},
+    variants:[
+      {q:'The Pilgrims came to America on a ship called the:',opts:['Titanic','Mayflower','Santa Maria','Enterprise'],ans:1,ok:'The Pilgrims sailed the Mayflower from England to Plymouth, Massachusetts in 1620!'},
+      {q:'The Declaration of Independence was signed in:',opts:['1775','1776','1781','1789'],ans:1,ok:'July 4, 1776 — the Continental Congress adopted the Declaration of Independence!'},
+      {q:'The Civil Rights Act of 1964:',opts:['Gave women the right to vote','Ended WWII','Outlawed discrimination based on race, color, religion, sex, or national origin','Established Social Security'],ans:2,ok:'The Civil Rights Act of 1964 banned discrimination in public accommodations and employment — a landmark achievement of the civil rights movement!'},
+      {q:'The Berlin Wall fell in:',opts:['1945','1961','1989','2001'],ans:2,ok:'November 9, 1989 — the Berlin Wall fell, symbolizing the end of the Cold War and path to German reunification!'},
+      {q:'The Truman Doctrine (1947) established the policy of:',opts:['Isolationism','Containment of communism worldwide','Economic recovery for Europe','Nuclear deterrence only'],ans:1,ok:'Truman pledged U.S. support to nations threatened by communist takeover — the founding document of Cold War containment strategy!'},
+      {q:'Postcolonial theory examines:',opts:['Pre-industrial economic systems','The cultural and psychological effects of colonialism on colonized peoples and their literary representation','Medieval European feudalism','Ancient Greek democracy'],ans:1,ok:'Postcolonial theory (Said\'s "Orientalism," Fanon\'s "The Wretched of the Earth") analyzes how colonialism shaped identity, power, and culture!'}
+    ]},
+  creek_logic:{id:'creek_logic',zone:'pebble',npc:'mira',subject:'logic',icon:'🧩',
+    title:'Stepping Stone Logic',lore:'To cross the creek, you must solve logic puzzles on each stepping stone!',
+    reward:{type:'acc',idx:3},enemy:{name:'Logic Leech',em:'🧩',hp:2},
+    variants:[
+      {q:'Which is bigger: 15 or 51?',opts:['15','51','They\'re equal','Can\'t determine'],ans:1,ok:'51 > 15 — the tens digit of 51 (five) is larger than 15\'s (one)!'},
+      {q:'What comes next: 1, 4, 9, 16, ___?',opts:['20','25','36','24'],ans:1,ok:'Perfect squares: 1², 2², 3², 4², 5² = 25!'},
+      {q:'In a group of 20 students: 12 play sports, 8 play music, 4 do both. How many do at least one?',opts:['16','20','24','15'],ans:0,ok:'Inclusion-exclusion: |S∪M| = 12 + 8 − 4 = 16!'},
+      {q:'If 5 people each shake hands with every other person, how many handshakes total?',opts:['5','8','10','15'],ans:2,ok:'C(5,2) = 5!/(2!×3!) = 10 handshakes — each pair shakes once!'},
+      {q:'The Monty Hall problem: after a goat is revealed behind one of two remaining doors, you should:',opts:['Stay — odds are 50/50','Switch — switching gives a 2/3 chance of winning','Stay — your original pick had better odds','It makes no difference'],ans:1,ok:'Switching wins 2/3 of the time. Your original door = 1/3 probability. The other door absorbs the 2/3 from the eliminated door!'},
+      {q:'In game theory, a Nash equilibrium is:',opts:['When all players win the maximum','A state where no player benefits from unilaterally changing their strategy','When one player dominates all others','The optimal cooperative outcome (Pareto-efficient)'],ans:1,ok:'Nash equilibrium: no player can improve their outcome by changing strategy alone. The Prisoner\'s Dilemma reaches a Nash equilibrium at mutual defection!'}
+    ]},
+  creek_civics:{id:'creek_civics',zone:'pebble',npc:'mira',subject:'civics',icon:'🏛️',
+    title:'Democracy at the Creek',lore:'The creek creatures want self-governance. Teach them the principles of American democracy!',
+    reward:{type:'hair',idx:3},enemy:{name:'Misinformation Mist',em:'🌫️',hp:2},
+    variants:[
+      {q:'What is a rule?',opts:['Something you eat','Something you follow to stay safe and be fair to others','A type of game','A kind of house'],ans:1,ok:'Rules protect everyone — they create fairness and safety in communities!'},
+      {q:'Who can vote in US elections?',opts:['Anyone in the US','US citizens who are 18 or older','Only men','Only property owners'],ans:1,ok:'The 26th Amendment (1971) set the voting age at 18 for all US citizens!'},
+      {q:'Federalism divides power between:',opts:['The president and Congress','National and state governments','Congress and the courts','Elected and appointed officials'],ans:1,ok:'Federalism is the constitutional division of power between the federal government and 50 state governments!'},
+      {q:'The First Amendment protects all EXCEPT:',opts:['Freedom of speech','Right to bear arms','Freedom of the press','Freedom of religion'],ans:1,ok:'Right to bear arms = 2nd Amendment! The 1st protects speech, religion, press, assembly, and petition!'},
+      {q:'Habeas corpus protects:',opts:['Freedom of speech','The right not to be imprisoned without being formally charged','Voting rights','Property rights'],ans:1,ok:'Habeas corpus (Latin: "produce the body") prevents governments from holding people indefinitely without charges — foundational to liberty!'},
+      {q:'Tocqueville\'s "tyranny of the majority" warns that:',opts:['Military power is the greatest threat to democracy','Democratic majorities can suppress minorities and enforce social conformity','The president always has too much power','Economic inequality inevitably destroys democracy'],ans:1,ok:'Tocqueville\'s Democracy in America (1835) observed that American democracy risked "soft despotism" — conformity enforced by social pressure rather than government force!'}
+    ]},
+
+  // ── STONEHAVEN TOWN ───────────────────────────────────────────
+  stone_math:{id:'stone_math',zone:'stonehaven',npc:'thornwood',subject:'math',icon:'🔢',
+    title:'Market Mathematics',lore:'The Stonehaven market runs on math. Help Thornwood make sure the merchants are calculating correctly!',
+    reward:{type:'acc',idx:2},enemy:{name:'Coin Goblin',em:'💰',hp:3},
+    variants:[
+      {q:'You have 10 coins and spend 4. How many remain?',opts:['5','6','7','8'],ans:1,ok:'10 − 4 = 6 coins!'},
+      {q:'What is 15% of 60?',opts:['6','8','9','12'],ans:2,ok:'15% of 60 = 0.15 × 60 = 9!'},
+      {q:'A merchant marks up goods by 20% then gives a 10% discount. Net change?',opts:['10% increase','8% increase','2% decrease','12% increase'],ans:1,ok:'1.20 × 0.90 = 1.08 — an 8% net increase over the original price!'},
+      {q:'$1,000 invested at 5% annual compound interest for 2 years becomes:',opts:['$1,100','$1,102.50','$1,050','$1,025'],ans:1,ok:'A = 1000(1.05)² = 1000 × 1.1025 = $1,102.50!'},
+      {q:'The normal distribution is characterized by:',opts:['Right skew','Multiple peaks (bimodal)','A symmetric bell curve where mean = median = mode','Uniform spread across all values'],ans:2,ok:'The normal distribution is perfectly symmetric — mean, median, and mode coincide at the center!'},
+      {q:'In linear regression, the ordinary least squares method minimizes:',opts:['The sum of residuals','The sum of SQUARED residuals (Σ(yᵢ − ŷᵢ)²)','The standard deviation','The correlation coefficient'],ans:1,ok:'OLS minimizes the sum of squared residuals — squaring penalizes large errors more and has nice mathematical properties!'}
+    ]},
+  stone_sci:{id:'stone_sci',zone:'stonehaven',npc:'thornwood',subject:'sci',icon:'🌿',
+    title:'Town Technology',lore:'Stonehaven\'s machines are breaking down. Use your science knowledge to repair them!',
+    reward:{type:'shoes',idx:2},enemy:{name:'Rust Sprite',em:'⚙️',hp:3},
+    variants:[
+      {q:'What does a magnet attract?',opts:['All metals','Certain metals like iron, nickel, and cobalt','Wood and plastic','All liquids'],ans:1,ok:'Magnets attract ferromagnetic materials — iron, nickel, cobalt, and their alloys!'},
+      {q:'The three states of matter are:',opts:['Hot, warm, cold','Solid, liquid, gas (and plasma as a 4th)','Air, water, earth','Hard, soft, runny'],ans:1,ok:'Matter exists as solid (fixed shape), liquid (fixed volume), gas (expands to fill container) — and plasma at extreme temperatures!'},
+      {q:'Newton\'s Second Law states:',opts:['Objects in motion stay in motion (inertia)','F = ma — force equals mass times acceleration','Every action has an equal opposite reaction','Energy cannot be created or destroyed'],ans:1,ok:'F = ma is the foundation of classical mechanics — a larger force or smaller mass means greater acceleration!'},
+      {q:'The atomic number of carbon is:',opts:['4','6','8','12'],ans:1,ok:'Carbon has 6 protons (atomic number 6) — the basis of all organic chemistry!'},
+      {q:'Covalent bonds involve:',opts:['Transfer of electrons from one atom to another','Sharing of electrons between atoms','Attraction between oppositely charged ions','Metal atoms sharing free electrons'],ans:1,ok:'Covalent bonds (H₂O, CO₂, organic molecules) share electron pairs between atoms — creating strong, directional bonds!'},
+      {q:'Le Chatelier\'s principle states that if a system at equilibrium is disturbed:',opts:['It stays the same','It shifts to counteract the disturbance and restore equilibrium','It collapses completely','Temperature always increases'],ans:1,ok:'Le Chatelier\'s principle predicts how equilibria respond to changes in concentration, temperature, or pressure — crucial in industrial chemistry!'}
+    ]},
+  stone_read:{id:'stone_read',zone:'stonehaven',npc:'thornwood',subject:'read',icon:'📖',
+    title:'Town Crier\'s Tales',lore:'The town crier has lost his stories. Help him reconstruct the narrative arts!',
+    reward:{type:'hair',idx:2},enemy:{name:'Rumor Wraith',em:'📰',hp:2},
+    variants:[
+      {q:'A dictionary helps you find:',opts:['Math solutions','Word meanings, spellings, and pronunciations','Maps and directions','Scientific formulas'],ans:1,ok:'Dictionaries define words, show correct spelling, pronunciation, part of speech, and usage examples!'},
+      {q:'A compound sentence joins two independent clauses with:',opts:['A semicolon only','A coordinating conjunction (for, and, nor, but, or, yet, so — FANBOYS)','A comma alone (comma splice)','A period'],ans:1,ok:'Compound sentences: "The sun rose, AND the birds sang." Two complete thoughts joined by a FANBOYS conjunction!'},
+      {q:'Point of view in literature refers to:',opts:['How fast the story moves','The perspective from which the story is narrated','The story\'s central conflict','The physical setting'],ans:1,ok:'POV: 1st person (I/we), 2nd person (you), 3rd limited (he/she — one character\'s perspective), 3rd omniscient (all-knowing narrator)!'},
+      {q:'In "Animal Farm," the pigs\' takeover is an allegory for:',opts:['Animal intelligence','The Russian Revolution and corruption of communist ideals under Stalin','Farm management techniques','General political cynicism'],ans:1,ok:'Orwell\'s allegory: Old Major = Marx/Lenin, Napoleon = Stalin, Snowball = Trotsky. "All animals are equal, but some are more equal than others."'},
+      {q:'Magical realism (García Márquez, Borges) is characterized by:',opts:['Science fiction in realistic settings','Fantastical elements treated as ordinary within a realistic world','Surrealist dreamscapes with no realistic grounding','Horror fiction with supernatural elements'],ans:1,ok:'"One Hundred Years of Solitude" exemplifies magical realism — ghosts and miracles appear in an otherwise realistic Colombia without surprise!'},
+      {q:'In narratology, anachrony refers to:',opts:['A type of narrator','Discrepancies between story chronology and the order events are narrated (analepsis/prolepsis)','A foreign literary technique','Postmodern self-referentiality'],ans:1,ok:'Anachrony includes analepsis (flashback = past events) and prolepsis (flashforward = future events) — how narrators manipulate story time!'}
+    ]},
+  stone_hist:{id:'stone_hist',zone:'stonehaven',npc:'thornwood',subject:'hist',icon:'🏛️',
+    title:'Town Records',lore:'Stonehaven\'s historical records have been scrambled. Restore them to their proper order!',
+    reward:{type:'outfit',idx:2},enemy:{name:'Scroll Specter',em:'📜',hp:3},
+    variants:[
+      {q:'Who primarily wrote the Declaration of Independence?',opts:['George Washington','Thomas Jefferson','Benjamin Franklin','John Adams'],ans:1,ok:'Thomas Jefferson drafted the Declaration of Independence in 1776, with revisions from Franklin and Adams!'},
+      {q:'The US Civil War was primarily fought over:',opts:['Western territorial expansion','Slavery and states\' rights','Trade relations with Britain','A dispute over gold'],ans:1,ok:'The Civil War (1861–1865) was fundamentally about whether slavery would continue and whether states could leave the Union!'},
+      {q:'The US entered World War II after:',opts:['Germany invaded Poland','Japan attacked Pearl Harbor, Hawaii','The Lusitania was sunk','France fell to Nazi Germany'],ans:1,ok:'Japan\'s surprise attack on Pearl Harbor (December 7, 1941) brought the US into WWII — FDR called it "a date which will live in infamy"!'},
+      {q:'McCarthyism (1950s) refers to:',opts:['Civil rights activism','Anti-communist paranoia, blacklisting, and political persecution during the Red Scare','Korean War military strategy','School desegregation efforts'],ans:1,ok:'Senator McCarthy\'s crusade against alleged communists destroyed careers with little evidence — McCarthyism became synonymous with political witch hunts!'},
+      {q:'LBJ\'s Great Society programs (1960s) included:',opts:['Space race funding only','Medicare, Medicaid, Voting Rights Act (1965), education funding, and anti-poverty programs','Vietnam War escalation only','Nixon\'s foreign policy'],ans:1,ok:'The Great Society was the most ambitious domestic agenda since the New Deal — transforming healthcare, education, and civil rights!'},
+      {q:'Wallerstein\'s World-Systems Theory argues:',opts:['All nations develop equally over time','The global economy maintains inequality through core, semi-periphery, and periphery nations','Capitalism benefits all participating nations equally','Only cultural factors explain development'],ans:1,ok:'World-Systems Theory (Wallerstein, 1974) argues core nations extract wealth from the periphery through unequal exchange — explaining persistent global inequality!'}
+    ]},
+  stone_logic:{id:'stone_logic',zone:'stonehaven',npc:'thornwood',subject:'logic',icon:'🧩',
+    title:'Market Puzzles',lore:'The market merchants have set up tricky logic puzzles to test buyers. Can you solve them?',
+    reward:{type:'acc',idx:3},enemy:{name:'Merchant Sphinx',em:'🦁',hp:3},
+    variants:[
+      {q:'If you buy 3 apples and 2 oranges, how many fruits total?',opts:['3','4','5','6'],ans:2,ok:'3 + 2 = 5 fruits!'},
+      {q:'A recipe for 12 cookies uses 2 cups of flour. How much flour for 36 cookies?',opts:['4 cups','6 cups','8 cups','3 cups'],ans:1,ok:'36 ÷ 12 = 3 times the recipe. 3 × 2 = 6 cups!'},
+      {q:'A merchant sells at 40% profit. The item cost $25. Selling price?',opts:['$30','$35','$40','$45'],ans:1,ok:'$25 × 1.40 = $35!'},
+      {q:'P(sale item sold) = 0.3, P(non-sale sold) = 0.7. P(at least one of these two items sold)?',opts:['0.91','0.79','0.51','0.21'],ans:1,ok:'P(neither) = (1−0.3)(1−0.7) = 0.7 × 0.3 = 0.21. P(at least one) = 1 − 0.21 = 0.79!'},
+      {q:'In decision theory, expected value is:',opts:['The most likely outcome','The sum of all outcomes weighted by their probabilities','The maximum possible outcome','The minimum guaranteed outcome'],ans:1,ok:'EV = Σ(probability × payoff) — the theoretical average if you repeated the decision many times!'},
+      {q:'The Halting Problem (Turing, 1936) proves:',opts:['All programs eventually stop','No general algorithm can determine whether an arbitrary program will halt or run forever','Computers can solve all mathematical problems','All programming languages are equivalent'],ans:1,ok:'Turing\'s Halting Problem proves fundamental limits of computation — some problems are undecidable, and no algorithm can solve them in general!'}
+    ]},
+  stone_civics:{id:'stone_civics',zone:'stonehaven',npc:'thornwood',subject:'civics',icon:'🏛️',
+    title:'Town Meeting',lore:'Stonehaven is holding a town meeting about new laws. Help the citizens understand the process!',
+    reward:{type:'hair',idx:3},enemy:{name:'Gridlock Golem',em:'🏛️',hp:3},
+    variants:[
+      {q:'Why do communities have laws?',opts:['To make life difficult','To protect people and ensure fairness','Because ancient kings invented them','Laws aren\'t really necessary'],ans:1,ok:'Laws establish rules for society — protecting people from harm, ensuring fairness, and enabling cooperation!'},
+      {q:'Congress is divided into two chambers:',opts:['The President\'s Cabinet and the Courts','The Senate and the House of Representatives','State legislatures and Congress','Federal and local governments'],ans:1,ok:'The bicameral Congress: Senate (100 senators, 2 per state) + House of Representatives (435 members, proportional to population)!'},
+      {q:'Every US state has exactly ___ senators:',opts:['Varies by population','1','2','5'],ans:2,ok:'Equal representation: every state, regardless of size, sends 2 senators to Washington. 50 states × 2 = 100 senators total!'},
+      {q:'Citizens United v. FEC (2010) held that:',opts:['Corporate political donations are banned','Political spending by corporations is protected by the First Amendment (free speech)','Voting must be expanded','All campaign contributions must be disclosed'],ans:1,ok:'Citizens United (5-4 decision) equated political spending with free speech, unleashing unlimited "outside" spending in elections!'},
+      {q:'The War Powers Resolution (1973) limits the president by requiring:',opts:['A formal declaration of war for all military action','Notification of Congress within 48 hours of troop deployment, and withdrawal within 60 days without authorization','UN Security Council approval','Only Congress to direct military operations'],ans:1,ok:'Passed over Nixon\'s veto after Vietnam, the War Powers Resolution attempts to limit undeclared presidential wars!'},
+      {q:'Pluralism in political science (Robert Dahl) argues:',opts:['A single elite controls all government decisions','Power is distributed among many competing interest groups — no single group dominates','The president controls all policy outcomes','Democracy inevitably produces oligarchy'],ans:1,ok:'Dahl\'s pluralism: democracy = competition among many organized interests. His study of New Haven ("Who Governs?") found no single elite dominated all decisions!'}
     ]}
 };
 
