@@ -464,6 +464,12 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
   .map-wrap{overflow:auto;-webkit-overflow-scrolling:touch;cursor:grab;}
   .map-inner{min-width:700px;min-height:400px;}
   .map-hint{display:block;}
+  /* Character screen: break the overflow:hidden chain so both panels scroll as one page */
+  #V_char{overflow-y:auto;}
+  .cv-inner{display:block;overflow:visible;flex:none;}
+  .cv-left{overflow-y:visible;max-height:none;border-bottom:1.5px solid var(--border-pink);}
+  .cv-right{overflow-y:visible;padding-bottom:80px;}
+  #mainSVG{width:120px !important;}
   .char-tabs{gap:6px;}
   .char-tab{padding:10px 12px;font-size:.7rem;}
   .npc-dialogue{max-height:90vh;overflow-y:auto;}
