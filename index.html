@@ -456,6 +456,38 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .grad-next{font-size:.9rem;opacity:.65;font-style:italic;}
 @keyframes gradFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
+/* BOSS CHALLENGE */
+#bossOverlay{position:fixed;inset:0;z-index:300;display:none;flex-direction:column;align-items:stretch;background:#0a0014;color:white;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+#bossOverlay.on{display:flex;}
+.boss-header{background:linear-gradient(180deg,#1a0030 0%,#0a0014 100%);padding:18px 20px 14px;text-align:center;border-bottom:1px solid rgba(139,92,246,.3);flex-shrink:0;}
+.boss-hearts{font-size:1.5rem;letter-spacing:.25rem;margin-bottom:6px;}
+.boss-title{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fde68a;font-weight:700;margin-bottom:2px;}
+.boss-subtitle{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#a78bfa;opacity:.8;}
+.boss-em{font-size:3rem;animation:gradFloat 2.5s ease-in-out infinite;display:block;margin:10px 0;}
+.boss-progress{display:flex;justify-content:center;gap:6px;margin-top:10px;}
+.boss-pip{width:28px;height:6px;border-radius:3px;background:rgba(255,255,255,.15);}
+.boss-pip.done{background:#a78bfa;}
+.boss-pip.current{background:#fde68a;}
+.boss-body{flex:1;padding:20px 20px 30px;}
+.boss-q{font-size:1rem;font-weight:700;color:#e2e8f0;line-height:1.5;margin-bottom:18px;}
+.boss-lore{font-size:.78rem;color:#94a3b8;font-style:italic;margin-bottom:16px;line-height:1.5;}
+.boss-opts{display:flex;flex-direction:column;gap:10px;}
+.boss-opt{background:rgba(139,92,246,.12);border:1.5px solid rgba(139,92,246,.35);border-radius:12px;padding:14px 16px;font-size:.88rem;color:#e2e8f0;text-align:left;cursor:pointer;transition:background .15s,border-color .15s;}
+.boss-opt:hover{background:rgba(139,92,246,.28);border-color:#a78bfa;}
+.boss-opt.correct{background:rgba(34,197,94,.18);border-color:#4ade80;color:#bbf7d0;}
+.boss-opt.wrong{background:rgba(239,68,68,.18);border-color:#f87171;color:#fecaca;}
+.boss-feedback{margin-top:16px;padding:14px;background:rgba(255,255,255,.06);border-radius:10px;font-size:.84rem;line-height:1.5;color:#cbd5e1;min-height:48px;}
+.boss-next-btn{display:none;width:100%;margin-top:14px;padding:14px;background:linear-gradient(135deg,#7c3aed,#a855f7);border:none;border-radius:12px;color:white;font-size:.9rem;font-weight:700;cursor:pointer;}
+.boss-next-btn.show{display:block;}
+.boss-result{display:none;flex-direction:column;align-items:center;text-align:center;padding:30px 24px;gap:14px;}
+.boss-result.show{display:flex;}
+.boss-result-em{font-size:4.5rem;animation:gradFloat 2s ease-in-out infinite;}
+.boss-result-title{font-family:'Playfair Display',serif;font-size:2rem;color:#fde68a;}
+.boss-result-msg{font-size:.92rem;color:#cbd5e1;line-height:1.6;max-width:340px;}
+.boss-result-btns{display:flex;flex-direction:column;gap:10px;width:100%;max-width:300px;margin-top:8px;}
+@keyframes bossShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.boss-shake{animation:bossShake .4s ease;}
+
 /* MOBILE RESPONSIVE */
 @media(max-width:600px){
   html,body{overflow:hidden;}
@@ -717,6 +749,29 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
   </div>
   <div class="xp-strip"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
   <div id="screen" style="position:fixed;inset:0;z-index:200;pointer-events:none;"></div>
+  <!-- BOSS CHALLENGE OVERLAY -->
+  <div id="bossOverlay">
+    <div class="boss-header">
+      <div class="boss-hearts" id="bossHearts">❤️❤️❤️</div>
+      <span class="boss-em" id="bossEm">👾</span>
+      <div class="boss-title" id="bossTitle">Final Challenge</div>
+      <div class="boss-subtitle" id="bossSubtitle">Prove your mastery</div>
+      <div class="boss-progress" id="bossProgress"></div>
+    </div>
+    <div class="boss-body" id="bossBody">
+      <div class="boss-q" id="bossQ"></div>
+      <div class="boss-lore" id="bossLore"></div>
+      <div class="boss-opts" id="bossOpts"></div>
+      <div class="boss-feedback" id="bossFeedback"></div>
+      <button class="boss-next-btn" id="bossNextBtn" onclick="bossNext()">Next Challenge →</button>
+    </div>
+    <div class="boss-result" id="bossResult">
+      <span class="boss-result-em" id="bossResultEm">🏆</span>
+      <div class="boss-result-title" id="bossResultTitle"></div>
+      <div class="boss-result-msg" id="bossResultMsg"></div>
+      <div class="boss-result-btns" id="bossResultBtns"></div>
+    </div>
+  </div>
   <div id="frag-bar">
     <span class="frag-label">Codex:</span>
     <div class="frag-dot" id="fd0" title="Luminos Fragment"></div>
@@ -1050,6 +1105,32 @@ const ZONES=[
   {id:'cosmic',name:'Cosmic Sea',icon:'🌊',em:'🌌',gradeIdx:5,color:'#3b82f6',bg:'linear-gradient(135deg,#0f172a,#1e3a5f)',desc:'A sea of stars where cosmic truths drift.',quests:['cosm_math','cosm_sci','cosm_read','cosm_hist','cosm_logic','cosm_civics'],npc:'seraphina',mapX:55,mapY:20,fragIdx:5},
   {id:'philo',name:"Philosopher's Isle",icon:'🏝️',em:'🦉',gradeIdx:5,color:'#0ea5e9',bg:'linear-gradient(135deg,#082f49,#0c4a6e)',desc:'Where philosophers have debated for eons.',quests:['phil_math','phil_sci','phil_read','phil_hist','phil_logic','phil_civics'],npc:'seraphina',mapX:44,mapY:10,fragIdx:5},
   {id:'starsanctum',name:'Star Sanctum',icon:'⭐',em:'🌟',gradeIdx:5,color:'#f59e0b',bg:'linear-gradient(135deg,#1a0a2e,#3d0a4e)',desc:'The birthplace of the Codex of Stars. The final trial.',quests:['ss_math','ss_sci','ss_read','ss_hist','ss_logic','ss_civics'],npc:'stella',mapX:52,mapY:4,fragIdx:6,requiresAllFrags:true},
+];
+const BOSSES=[
+  {gradeIdx:0,name:'The Muddle King',em:'👾',subtitle:'K–2 Final Challenge',color:'#ec4899',
+   intro:'The Muddle King has scrambled all the knowledge of Luminos! Answer 6 questions drawn from every subject to drive him back.',
+   win:'The Muddle King dissolves into sparkling dust! Luminos glows brighter than ever. You\'ve proven yourself a true K–2 Starlet!',
+   lose:'The Muddle King\'s fog creeps back in… Rest, then return when you\'re ready.'},
+  {gradeIdx:1,name:'The Crystal Specter',em:'💎',subtitle:'3–5 Final Challenge',color:'#2dd4bf',
+   intro:'The Crystal Specter has shattered the knowledge crystals! Six echoes must be answered correctly to restore them.',
+   win:'The Crystal Specter shatters! Brilliant light floods the caves. Your 3–5 mastery is sealed!',
+   lose:'The Specter\'s shards scatter your thoughts… Regroup and face it again.'},
+  {gradeIdx:2,name:'The Shadow Scholar',em:'🌑',subtitle:'6–8 Final Challenge',color:'#8b5cf6',
+   intro:'The Shadow Scholar has consumed the Celestial Library\'s light. Six trials test whether you can reclaim it.',
+   win:'The Shadow Scholar flees into the dark! Your knowledge illuminates the Celestial Library once more. Grade 6–8 complete!',
+   lose:'The Shadow Scholar smirks and retreats… You\'ll need more knowledge to stop it.'},
+  {gradeIdx:3,name:'The Void Warden',em:'🌀',subtitle:'9–10 Final Challenge',color:'#f59e0b',
+   intro:'The Void Warden stands between the Academy and the upper realms. Six hard questions guard the passage.',
+   win:'The Void Gate swings open! You\'ve defeated the Warden with superior knowledge. 9–10 mastery achieved!',
+   lose:'The Warden seals the gate. Your knowledge must grow stronger before it opens.'},
+  {gradeIdx:4,name:'The Dark Archmage',em:'🔮',subtitle:'11–12 Final Challenge',color:'#7c3aed',
+   intro:'The Dark Archmage guards the threshold to the cosmic realms. Only six perfect answers will break the seal.',
+   win:'The Dark Archmage bows in defeat! The seal shatters and the cosmos unfolds before you. 11–12 conquered!',
+   lose:'The Archmage laughs as the seal holds… Return stronger.'},
+  {gradeIdx:5,name:'Korrath Unbound',em:'🐉',subtitle:'College Final Challenge',color:'#dc2626',
+   intro:'Korrath Unbound — the source of the Great Forgetting itself — rises for one last confrontation. Six questions across all knowledge stand between you and complete mastery.',
+   win:'Korrath dissolves into starlight! The Great Forgetting is ended. You have achieved College Mastery and become a true Champion of the Academy of the Starlet!',
+   lose:'Even Korrath is surprised — but the seals hold. Study further and return.'}
 ];
 const ZONE_KEYS=ZONES.map(z=>z.id);
 const MAP_PATHS=[
@@ -3218,7 +3299,7 @@ function checkGraduation(){
   const existing=needed.filter(qid=>QUESTS[qid]);
   if(existing.length===0)return;
   if(existing.every(qid=>P.donequests.includes(qid))){
-    showGraduation();
+    startBoss(P.currentGrade??0);
   }
 }
 function showGraduation(){
@@ -3250,6 +3331,165 @@ async function advanceGrade(){
   if(scr){scr.innerHTML='';scr.style.pointerEvents='none';}
   showView('map');
 }
+
+// ── BOSS CHALLENGE ─────────────────────────────────────────────────
+let _bossState=null;
+
+function getBossQuestions(gradeIdx){
+  const subjects=['math','sci','read','hist','logic','civics'];
+  const gradeZones=ZONES.filter(z=>z.gradeIdx===gradeIdx);
+  const questions=[];
+  for(const sub of subjects){
+    const candidates=gradeZones.flatMap(z=>z.quests)
+      .filter(qid=>QUESTS[qid]&&QUESTS[qid].subject===sub);
+    if(!candidates.length)continue;
+    const qid=candidates[Math.floor(Math.random()*candidates.length)];
+    const quest=QUESTS[qid];
+    const v=quest.variants[gradeIdx]??quest.variants[2]??quest.variants[0];
+    if(v)questions.push({qid,quest,v});
+  }
+  // shuffle
+  for(let i=questions.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [questions[i],questions[j]]=[questions[j],questions[i]];
+  }
+  return questions;
+}
+
+function startBoss(gradeIdx){
+  const boss=BOSSES[gradeIdx];
+  if(!boss)return showGraduation();
+  const questions=getBossQuestions(gradeIdx);
+  if(!questions.length)return showGraduation();
+  _bossState={gradeIdx,boss,questions,current:0,hearts:3,answered:false};
+  const ov=document.getElementById('bossOverlay');
+  if(!ov)return showGraduation();
+  document.getElementById('bossTitle').textContent=boss.name;
+  document.getElementById('bossSubtitle').textContent=boss.subtitle;
+  document.getElementById('bossEm').textContent=boss.em;
+  document.getElementById('bossHearts').textContent='❤️❤️❤️';
+  document.getElementById('bossProgress').innerHTML='';
+  // show intro in bossBody before questions begin
+  document.getElementById('bossBody').style.display='block';
+  document.getElementById('bossBody').innerHTML=`
+    <p class="boss-lore" style="font-size:.92rem;color:#e2e8f0;margin-bottom:24px;line-height:1.65;">${boss.intro}</p>
+    <p style="color:#a78bfa;font-size:.8rem;margin-bottom:20px;">⚠️ You have 3 hearts. Each wrong answer costs one. Lose all three and you must retry.</p>
+    <button class="boss-next-btn show" onclick="bossBegin()">⚔️ Begin the Challenge</button>`;
+  document.getElementById('bossResult').className='boss-result';
+  ov.classList.add('on');
+}
+
+function bossBegin(){
+  if(!_bossState)return;
+  const body=document.getElementById('bossBody');
+  body.innerHTML=`<div class="boss-q" id="bossQ"></div>
+    <div class="boss-lore" id="bossLore"></div>
+    <div class="boss-opts" id="bossOpts"></div>
+    <div class="boss-feedback" id="bossFeedback"></div>
+    <button class="boss-next-btn" id="bossNextBtn" onclick="bossNext()">Next Challenge →</button>`;
+  renderBossQuestion();
+}
+
+function renderBossQuestion(){
+  if(!_bossState)return;
+  const{questions,current,hearts}=_bossState;
+  _bossState.answered=false;
+  document.getElementById('bossHearts').textContent='❤️'.repeat(hearts)+'🖤'.repeat(3-hearts);
+  const prog=document.getElementById('bossProgress');
+  prog.innerHTML=questions.map((_,i)=>`<div class="boss-pip${i<current?' done':i===current?' current':''}"></div>`).join('');
+  const{quest,v}=questions[current];
+  document.getElementById('bossQ').textContent=v.q;
+  document.getElementById('bossLore').textContent=quest.icon+' '+quest.title;
+  document.getElementById('bossFeedback').textContent='';
+  document.getElementById('bossNextBtn').className='boss-next-btn';
+  const opts=document.getElementById('bossOpts');
+  opts.innerHTML=v.opts.map((o,i)=>`<button class="boss-opt" onclick="bossPick(${i})">${o}</button>`).join('');
+}
+
+function bossPick(idx){
+  if(!_bossState||_bossState.answered)return;
+  _bossState.answered=true;
+  const{questions,current}=_bossState;
+  const{v}=questions[current];
+  const correct=idx===v.ans;
+  const btns=document.getElementById('bossOpts').querySelectorAll('.boss-opt');
+  btns.forEach((b,i)=>{
+    if(i===v.ans)b.classList.add('correct');
+    else if(i===idx)b.classList.add('wrong');
+    b.disabled=true;
+  });
+  document.getElementById('bossFeedback').textContent=correct?('✓ '+v.ok):'✗ The correct answer was: '+v.opts[v.ans];
+  if(!correct){
+    _bossState.hearts--;
+    const ov=document.getElementById('bossOverlay');
+    ov.classList.add('boss-shake');
+    setTimeout(()=>ov.classList.remove('boss-shake'),450);
+    document.getElementById('bossHearts').textContent='❤️'.repeat(_bossState.hearts)+'🖤'.repeat(3-_bossState.hearts);
+    if(_bossState.hearts<=0){
+      setTimeout(()=>showBossResult(false),900);
+      return;
+    }
+  }
+  document.getElementById('bossNextBtn').className='boss-next-btn show';
+}
+
+function bossNext(){
+  if(!_bossState)return;
+  _bossState.current++;
+  if(_bossState.current>=_bossState.questions.length){
+    showBossResult(true);
+  } else {
+    renderBossQuestion();
+  }
+}
+
+function showBossResult(won){
+  if(!_bossState)return;
+  const{boss}=_bossState;
+  document.getElementById('bossBody').style.display='none';
+  const res=document.getElementById('bossResult');
+  res.className='boss-result show';
+  document.getElementById('bossResultEm').textContent=won?'🏆':'💔';
+  document.getElementById('bossResultTitle').textContent=won?'Victory!':'Defeated…';
+  document.getElementById('bossResultMsg').textContent=won?boss.win:boss.lose;
+  const btns=document.getElementById('bossResultBtns');
+  if(won){
+    btns.innerHTML=`<button class="btn btn-gold" style="padding:14px 28px;font-size:.95rem;" onclick="bossVictory()">🎓 Advance to Next Grade →</button>`;
+    spawnParticles&&spawnParticles();
+  } else {
+    btns.innerHTML=`<button class="btn btn-primary" style="padding:14px 28px;font-size:.95rem;" onclick="retryBoss()">🔁 Try Again</button>
+      <button class="btn btn-outline" style="padding:12px 28px;font-size:.88rem;color:white;border-color:rgba(255,255,255,.3);" onclick="closeBoss()">← Return to Map</button>`;
+  }
+}
+
+async function bossVictory(){
+  closeBoss();
+  await advanceGrade();
+}
+
+function retryBoss(){
+  if(!_bossState)return;
+  const gradeIdx=_bossState.gradeIdx;
+  const boss=BOSSES[gradeIdx];
+  const questions=getBossQuestions(gradeIdx);
+  _bossState={gradeIdx,boss,questions,current:0,hearts:3,answered:false};
+  const body=document.getElementById('bossBody');
+  body.style.display='block';
+  body.innerHTML=`<div class="boss-q" id="bossQ"></div>
+    <div class="boss-lore" id="bossLore"></div>
+    <div class="boss-opts" id="bossOpts"></div>
+    <div class="boss-feedback" id="bossFeedback"></div>
+    <button class="boss-next-btn" id="bossNextBtn" onclick="bossNext()">Next Challenge →</button>`;
+  document.getElementById('bossResult').className='boss-result';
+  renderBossQuestion();
+}
+
+function closeBoss(){
+  const ov=document.getElementById('bossOverlay');
+  if(ov)ov.classList.remove('on');
+  _bossState=null;
+}
+// ────────────────────────────────────────────────────────────────────
 
 function checkZoneFragment(zoneId){
   const z=getZone(zoneId);if(!z)return;
